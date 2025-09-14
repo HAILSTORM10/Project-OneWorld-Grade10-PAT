@@ -1,0 +1,14 @@
+Getsu-youbi
+MONDAY
+Ka-youbi
+TUESDAY
+Sui-youbi
+WEDNESDAY
+Moku-youbi
+THURSDAY
+Kin-youbi
+FRIDAY
+Do-youbi
+SATURDAY
+Nichi-youbi
+SUNDAY
