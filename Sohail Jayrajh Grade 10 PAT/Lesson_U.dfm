@@ -1,18 +1,18 @@
-object frmJap: TfrmJap
+object frmLesson: TfrmLesson
   Left = 0
   Top = 0
-  Caption = 'frmJap'
+  Caption = 'frmLesson'
   ClientHeight = 720
   ClientWidth = 1280
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -27
+  Font.Name = 'Ink Free'
   Font.Style = []
   OldCreateOrder = False
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 34
   object imgReturn: TImage
     Left = 88
     Top = 8
@@ -20342,23 +20342,26 @@ object frmJap: TfrmJap
   object lblQues: TLabel
     Left = 528
     Top = 184
-    Width = 17
-    Height = 13
+    Width = 49
+    Height = 34
     Caption = 'Ichi'
+    Visible = False
   end
   object lblFeedback: TLabel
     Left = 800
     Top = 264
-    Width = 56
-    Height = 13
+    Width = 130
+    Height = 34
     Caption = 'lblFeedback'
+    Visible = False
   end
   object lblNewPoints: TLabel
     Left = 800
     Top = 296
-    Width = 60
-    Height = 13
+    Width = 145
+    Height = 34
     Caption = 'lblNewPoints'
+    Visible = False
   end
   object btnClose: TButton
     Left = 1197
@@ -20379,9 +20382,10 @@ object frmJap: TfrmJap
     Left = 496
     Top = 288
     Width = 121
-    Height = 21
+    Height = 42
     TabOrder = 1
     Text = 'edtAns'
+    Visible = False
   end
   object btnCheck: TButton
     Left = 470
@@ -20389,6 +20393,12 @@ object frmJap: TfrmJap
     Width = 75
     Height = 25
     Caption = 'btnCheck'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     OnClick = btnCheckClick
   end
@@ -20398,15 +20408,42 @@ object frmJap: TfrmJap
     Width = 75
     Height = 25
     Caption = 'btnStart'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 3
     OnClick = btnStartClick
   end
   object btnLearn: TButton
-    Left = 320
+    Left = 328
     Top = 384
     Width = 75
     Height = 25
     Caption = 'btnLearn'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
+    OnClick = btnLearnClick
+  end
+  object redOut: TRichEdit
+    Left = 24
+    Top = 192
+    Width = 265
+    Height = 383
+    Font.Charset = SHIFTJIS_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Ink Free'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 5
+    Visible = False
   end
 end

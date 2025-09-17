@@ -55,8 +55,11 @@
 			<DCCReference Include="Help_U.pas">
 				<Form>frmHelp</Form>
 			</DCCReference>
-			<DCCReference Include="Jap_U.pas">
-				<Form>frmJap</Form>
+			<DCCReference Include="Lesson_U.pas">
+				<Form>frmLesson</Form>
+			</DCCReference>
+			<DCCReference Include="Shop_U.pas">
+				<Form>frmShop</Form>
 			</DCCReference>
 			<BuildConfiguration Include="Base">
 				<Key>Base</Key>

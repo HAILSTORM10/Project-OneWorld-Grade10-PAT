@@ -29,18 +29,16 @@ type
     { Private declarations }
   public
     { Public declarations }
-    iPoints : Integer;
+    iPoints: Integer;
+    tUsin: TextFile;
+    sUser, sPass, sCourses: String;
   end;
-
-//  CONST
-//  sCourseOptions : Array[1..3] of string = ('Test', 'Yeah, test', 'wow, an array') ;
 
 var
   frmLogIn: TfrmLogIn;
-  tUsin: TextFile;
-  sUser, sPass: String;
-  i : Integer;
+  i: Integer;
   bExists: Boolean;
+  sAvailableCourses: Array [1 .. 8] of TButton;
 
 implementation
 
@@ -62,6 +60,7 @@ begin
     WriteLN(tUsin, edtUser.Text);
     WriteLN(tUsin, edtPass.Text);
     WriteLN(tUsin, '0');
+    WriteLN(tUsin, '10001000');
     ShowMessage('User Succesfully Created');
   end
   else
@@ -71,6 +70,7 @@ begin
     WriteLN(tUsin, edtUser.Text);
     WriteLN(tUsin, edtPass.Text);
     WriteLN(tUsin, '0');
+    WriteLN(tUsin, '10001000');
     ShowMessage('User Succesfully Created');
   end;
   CloseFile(tUsin);
@@ -85,29 +85,56 @@ begin
   end
   else
   begin
-    AssignFile(tUsin, 'Userinfo.txt');
+    AssignFile(tUsin, 'Userinfo.txt');     // Clossed in Shop_U
     Reset(tUsin);
 
     repeat
       ReadLN(tUsin, sUser);
       ReadLN(tUsin, sPass);
       ReadLN(tUsin, iPoints);
+      ReadLN(tUsin, sCourses);
     until (EOF(tUsin)) OR (sUser = edtUser.Text) AND (sPass = edtPass.Text);
 
     // Admin Check
 
-    if (edtUser.Text = 'Admin')  AND (edtPass.Text = 'Admin@123')then
+    if (edtUser.Text = 'Admin') AND (edtPass.Text = 'Admin@123') then
     begin
-     ShowMessage('You got it, boss!');
+      ShowMessage('You got it, boss!');
       frmLogIn.Hide;
       frmDash.show;
-      frmDash.btnadmin.visible := true ;
+      frmDash.btnadmin.visible := true;
+
     end
-    else if (sUser = edtUser.Text) And (sPass = edtPass.Text) then // Normal user Check
+    else if (sUser = edtUser.Text) And (sPass = edtPass.Text) then
+    // Normal user Check
     begin
       ShowMessage('Succsess!');
       frmLogIn.Hide;
       frmDash.show;
+
+      // Checks what courses should be available to this user
+
+      sAvailableCourses[1] := frmDash.btnJapNum;
+      sAvailableCourses[2] := frmDash.btnJapDays;
+      sAvailableCourses[3] := frmDash.btnJapMonths;
+      sAvailableCourses[4] := frmDash.btnJapNouns;
+      sAvailableCourses[5] := frmDash.btnAfriNum;
+      sAvailableCourses[6] := frmDash.btnAfriDays;
+      sAvailableCourses[7] := frmDash.btnAfriMonths;
+      sAvailableCourses[8] := frmDash.btnAfriNouns;
+
+      for i := 1 to 8 do
+      begin
+        if sCourses[i] = '1' then
+        begin
+          sAvailableCourses[i].visible := true;
+        end
+        else
+        begin
+          sAvailableCourses[i].visible := False;
+        end;
+      end;         // End Course Check
+
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.Text) then
     begin
@@ -118,7 +145,7 @@ begin
       ShowMessage('Password is Incorrect!');
     end; // END EVERYTHING
 
-    CloseFile(tUsin);
+//    CloseFile(tUsin);
     frmDash.lblHeader.caption := ('Good to See you Again, ' + sUser + ' !');
     frmDash.lblPoints.caption := ('Points: ' + IntToStr(iPoints));
   end;
@@ -126,7 +153,7 @@ end;
 
 procedure TfrmLogIn.FormCreate(Sender: TObject);
 begin
-imgBack.SendToBack;
+  imgBack.SendToBack;
 end;
 
 procedure TfrmLogIn.imgHelpClick(Sender: TObject);

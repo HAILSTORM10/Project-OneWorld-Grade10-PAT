@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, pngimage, ExtCtrls;
+  Dialogs, StdCtrls, pngimage, ExtCtrls, jpeg;
 
 type
   TfrmDash = class(TForm)
@@ -25,6 +25,7 @@ type
     btnAfriDays: TButton;
     btnAfriMonths: TButton;
     btnAfriNouns: TButton;
+    imgShop: TImage;
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
@@ -34,11 +35,16 @@ type
     procedure btnJapDaysClick(Sender: TObject);
     procedure btnJapMonthsClick(Sender: TObject);
     procedure btnJapNounsClick(Sender: TObject);
+    procedure btnAfriNumClick(Sender: TObject);
+    procedure btnAfriDaysClick(Sender: TObject);
+    procedure btnAfriMonthsClick(Sender: TObject);
+    procedure btnAfriNounsClick(Sender: TObject);
+    procedure imgShopClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    tJP : Textfile;
+    tLesson : Textfile;  // File Closed in Lesson_U
 //    sActiveCourse : string;
   end;
 
@@ -47,9 +53,44 @@ var
 
 implementation
 
-uses Help_U, LogIn_U, Jap_U;
+uses Help_U, LogIn_U, Lesson_U, Shop_U;
 
 {$R *.dfm}
+
+procedure TfrmDash.btnAfriDaysClick(Sender: TObject);
+begin
+//Load File For Days and Preps Scene
+AssignFile(tLesson, 'Afri\AfriDays.txt');
+frmLesson.Show;
+frmDash.Hide;
+end;
+
+procedure TfrmDash.btnAfriMonthsClick(Sender: TObject);
+begin
+
+//Load File For Months and Preps Scene
+AssignFile(tLesson, 'Jap\JPMonths.txt');
+frmLesson.Show;
+frmDash.Hide;
+
+end;
+
+procedure TfrmDash.btnAfriNounsClick(Sender: TObject);
+begin
+//Load File For Nouns and Preps Scene
+AssignFile(tLesson, 'Afri\AfriNouns.txt');
+frmLesson.Show;
+frmDash.Hide;
+
+end;
+
+procedure TfrmDash.btnAfriNumClick(Sender: TObject);
+begin
+//Load File For Numbers and Preps Scene
+AssignFile(tLesson, 'Afri\AfriNumbers.txt');
+frmLesson.Show;
+frmDash.Hide;
+end;
 
 procedure TfrmDash.btnCloseClick(Sender: TObject);
 begin
@@ -60,11 +101,8 @@ procedure TfrmDash.btnJapDaysClick(Sender: TObject);
 begin
 
 //Load File For Days and Preps Scene
-AssignFile(tJP, 'Jap\JPDays.txt');
-frmJap.btnCheck.hide;
-frmJap.edtANS.hide;
-frmJap.lblQues.hide;
-frmJap.Show;
+AssignFile(tLesson, 'Jap\JPDays.txt');
+frmLesson.Show;
 frmDash.Hide;
 end;
 
@@ -72,11 +110,8 @@ procedure TfrmDash.btnJapMonthsClick(Sender: TObject);
 begin
 
 //Load File For Months and Preps Scene
-AssignFile(tJP, 'Jap\JPMonths.txt');
-frmJap.btnCheck.hide;
-frmJap.edtANS.hide;
-frmJap.lblQues.hide;
-frmJap.Show;
+AssignFile(tLesson, 'Jap\JPMonths.txt');
+frmLesson.Show;
 frmDash.Hide;
 
 end;
@@ -85,11 +120,8 @@ procedure TfrmDash.btnJapNounsClick(Sender: TObject);
 begin
 
 //Load File For Nouns and Preps Scene
-AssignFile(tJP, 'Jap\JPNouns.txt');
-frmJap.btnCheck.hide;
-frmJap.edtANS.hide;
-frmJap.lblQues.hide;
-frmJap.Show;
+AssignFile(tLesson, 'Jap\JPNouns.txt');
+frmLesson.Show;
 frmDash.Hide;
 
 end;
@@ -98,24 +130,21 @@ procedure TfrmDash.btnJapNumClick(Sender: TObject);
 begin
 
 //Load File For Numbers and Preps Scene
-AssignFile(tJP, 'Jap\JPNumbers.txt');
-frmJap.btnCheck.hide;
-frmJap.edtANS.hide;
-frmJap.lblQues.hide;
-frmJap.Show;
+AssignFile(tLesson, 'Jap\JPNumbers.txt');
+frmLesson.Show;
 frmDash.Hide;
 
 end;
 
 procedure TfrmDash.Button1Click(Sender: TObject);
 begin
-ShowMessage(sUser);
+ShowMessage(frmLogIn.sUser);
 end;
 
 procedure TfrmDash.FormCreate(Sender: TObject);
 begin
 imgBack.SendToBack;
-lblHeader.Caption := ('Good to See you Again, ' + sUser + ' !') ;
+lblHeader.Caption := ('Good to See you Again, ' + frmLogIn.sUser + ' !') ;
 end;
 
 
@@ -129,6 +158,14 @@ procedure TfrmDash.imgReturnClick(Sender: TObject);
 begin
 frmDash.Hide;
 frmLogin.show;
+end;
+
+procedure TfrmDash.imgShopClick(Sender: TObject);
+begin
+
+frmShop.Show ;
+frmDash.Hide;
+
 end;
 
 end.

@@ -1,0 +1,14 @@
+Maandag
+MONDAY
+Dinsdag
+TUESDAY
+Woensdag
+WEDNESDAY
+Donderdag
+THURSDAY
+Vrydag
+FRIDAY
+Saterdag
+SATURDAY
+Sondag
+Sunday

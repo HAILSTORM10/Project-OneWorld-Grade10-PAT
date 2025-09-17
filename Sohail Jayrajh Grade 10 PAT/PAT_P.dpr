@@ -6,7 +6,8 @@ uses
   LogIn_U in 'LogIn_U.pas' {frmLogIn},
   Dashboard_U in 'Dashboard_U.pas' {frmDash},
   Help_U in 'Help_U.pas' {frmHelp},
-  Jap_U in 'Jap_U.pas' {frmJap};
+  Lesson_U in 'Lesson_U.pas' {frmLesson},
+  Shop_U in 'Shop_U.pas' {frmShop};
 
 {$R *.res}
 
@@ -17,6 +18,7 @@ begin
   Application.CreateForm(TfrmLogIn, frmLogIn);
   Application.CreateForm(TfrmDash, frmDash);
   Application.CreateForm(TfrmHelp, frmHelp);
-  Application.CreateForm(TfrmJap, frmJap);
+  Application.CreateForm(TfrmLesson, frmLesson);
+  Application.CreateForm(TfrmShop, frmShop);
   Application.Run;
 end.
