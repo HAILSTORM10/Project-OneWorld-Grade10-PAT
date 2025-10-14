@@ -20400,6 +20400,8 @@ object frmLesson: TfrmLesson
     Font.Style = []
     ParentFont = False
     TabOrder = 2
+    Visible = False
+    WordWrap = True
     OnClick = btnCheckClick
   end
   object btnStart: TButton

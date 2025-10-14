@@ -53,9 +53,10 @@ end;
 procedure TfrmLogIn.btnCreateClick(Sender: TObject);
 begin
 
+  AssignFile(tUsin, 'Userinfo.txt');
+
   if NOT FILEEXISTS('Userinfo.txt') then
   begin
-    AssignFile(tUsin, 'Userinfo.txt');
     Rewrite(tUsin);
     WriteLN(tUsin, edtUser.Text);
     WriteLN(tUsin, edtPass.Text);
@@ -65,8 +66,7 @@ begin
   end
   else
   begin
-    AssignFile(tUsin, 'Userinfo.txt');
-    Append(tUsin);
+    Reset(tUsin);
     WriteLN(tUsin, edtUser.Text);
     WriteLN(tUsin, edtPass.Text);
     WriteLN(tUsin, '0');
@@ -85,7 +85,7 @@ begin
   end
   else
   begin
-    AssignFile(tUsin, 'Userinfo.txt');     // Clossed in Shop_U
+    AssignFile(tUsin, 'Userinfo.txt'); // Clossed in Shop_U
     Reset(tUsin);
 
     repeat
@@ -133,7 +133,7 @@ begin
         begin
           sAvailableCourses[i].visible := False;
         end;
-      end;         // End Course Check
+      end; // End Course Check
 
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.Text) then
@@ -145,7 +145,7 @@ begin
       ShowMessage('Password is Incorrect!');
     end; // END EVERYTHING
 
-//    CloseFile(tUsin);
+    // CloseFile(tUsin);
     frmDash.lblHeader.caption := ('Good to See you Again, ' + sUser + ' !');
     frmDash.lblPoints.caption := ('Points: ' + IntToStr(iPoints));
   end;

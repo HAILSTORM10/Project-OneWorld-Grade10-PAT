@@ -68,6 +68,7 @@ begin
       lblFeedback.Caption := sIncorrectMotivation[iNum];
     end; // END Answer Check
 
+    edtAns.Clear;
     ReadLN(frmDash.tLesson, sQuestion);
     ReadLN(frmDash.tLesson, sAnswer);
     lblQues.Caption := sQuestion;
@@ -82,6 +83,7 @@ begin
 
     btnStart.Visible := True;
     btnLearn.Visible := True;
+    btnCheck.Visible := False;
     frmLesson.btnCheck.Hide;
     frmLesson.edtAns.Hide;
     frmLesson.lblQues.Hide;
@@ -89,12 +91,12 @@ begin
     frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
     CloseFile(frmDash.tLesson);
 
-    AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
-    reset(frmLogIn.tUsin);
-    redOut.PlainText := True;
-    redOut.Lines.Add(frmLogIn.sUser);
-    redOut.Lines.Add(frmLogIn.sPass);
-    redOut.Lines.Add(IntTOStr(frmLogIn.iPoints));
+//    AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
+//    reset(frmLogIn.tUsin);
+//    redOut.PlainText := True;
+//    redOut.Lines.Add(frmLogIn.sUser);
+//    redOut.Lines.Add(frmLogIn.sPass);
+//    redOut.Lines.Add(IntTOStr(frmLogIn.iPoints));
 
     Repeat
     begin
@@ -137,6 +139,10 @@ begin
   btnStart.Visible := False;
   btnLearn.Visible := False;
   redOut.Visible := False;
+  btnCheck.Visible := True;
+  lblFeedback.Visible := True;
+  lblNewPoints.Visible := True;
+
 
   reset(frmDash.tLesson);
   ReadLN(frmDash.tLesson, sQuestion);
