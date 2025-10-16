@@ -7,7 +7,8 @@ uses
   Dashboard_U in 'Dashboard_U.pas' {frmDash},
   Help_U in 'Help_U.pas' {frmHelp},
   Lesson_U in 'Lesson_U.pas' {frmLesson},
-  Shop_U in 'Shop_U.pas' {frmShop};
+  Shop_U in 'Shop_U.pas' {frmShop},
+  Admin_U in 'Admin_U.pas' {frmAdmin};
 
 {$R *.res}
 
@@ -20,5 +21,6 @@ begin
   Application.CreateForm(TfrmHelp, frmHelp);
   Application.CreateForm(TfrmLesson, frmLesson);
   Application.CreateForm(TfrmShop, frmShop);
+  Application.CreateForm(TfrmAdmin, frmAdmin);
   Application.Run;
 end.

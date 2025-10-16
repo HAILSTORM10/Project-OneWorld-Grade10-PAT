@@ -26,6 +26,9 @@ type
     btnAfriMonths: TButton;
     btnAfriNouns: TButton;
     imgShop: TImage;
+    lblCustom: TLabel;
+    cmbCustom: TComboBox;
+    btnCustom: TButton;
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
@@ -40,12 +43,14 @@ type
     procedure btnAfriMonthsClick(Sender: TObject);
     procedure btnAfriNounsClick(Sender: TObject);
     procedure imgShopClick(Sender: TObject);
+    procedure btnCustomClick(Sender: TObject);
+    procedure btnAdminClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    tLesson : Textfile;  // File Closed in Lesson_U
-//    sActiveCourse : string;
+    tLesson: Textfile; // File Closed in Lesson_U
+    // sActiveCourse : string;
   end;
 
 var
@@ -53,118 +58,137 @@ var
 
 implementation
 
-uses Help_U, LogIn_U, Lesson_U, Shop_U;
-
+uses Help_U, LogIn_U, Lesson_U, Shop_U, Admin_U;
 {$R *.dfm}
+
+procedure TfrmDash.btnAdminClick(Sender: TObject);
+begin
+
+frmAdmin.show;
+
+
+end;
 
 procedure TfrmDash.btnAfriDaysClick(Sender: TObject);
 begin
-//Load File For Days and Preps Scene
-AssignFile(tLesson, 'Afri\AfriDays.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Days and Preps Scene
+  AssignFile(tLesson, 'Afri\AfriDays.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 end;
 
 procedure TfrmDash.btnAfriMonthsClick(Sender: TObject);
 begin
 
-//Load File For Months and Preps Scene
-AssignFile(tLesson, 'Jap\JPMonths.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Months and Preps Scene
+  AssignFile(tLesson, 'Afri\AfriMonths.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 
 end;
 
 procedure TfrmDash.btnAfriNounsClick(Sender: TObject);
 begin
-//Load File For Nouns and Preps Scene
-AssignFile(tLesson, 'Afri\AfriNouns.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Nouns and Preps Scene
+  AssignFile(tLesson, 'Afri\AfriNouns.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 
 end;
 
 procedure TfrmDash.btnAfriNumClick(Sender: TObject);
 begin
-//Load File For Numbers and Preps Scene
-AssignFile(tLesson, 'Afri\AfriNumbers.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Numbers and Preps Scene
+  AssignFile(tLesson, 'Afri\AfriNumbers.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 end;
 
 procedure TfrmDash.btnCloseClick(Sender: TObject);
 begin
-Application.Terminate;
+  Application.Terminate;
+end;
+
+procedure TfrmDash.btnCustomClick(Sender: TObject);
+VAR
+  sCustomLesson: String;
+begin
+
+// Loads file For a custom lesson
+
+  AssignFile(tLesson,
+    'Custom\' + cmbCustom.Items[cmbCustom.ItemIndex] + '.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 end;
 
 procedure TfrmDash.btnJapDaysClick(Sender: TObject);
 begin
 
-//Load File For Days and Preps Scene
-AssignFile(tLesson, 'Jap\JPDays.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Days and Preps Scene
+  AssignFile(tLesson, 'Jap\JPDays.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 end;
 
 procedure TfrmDash.btnJapMonthsClick(Sender: TObject);
 begin
 
-//Load File For Months and Preps Scene
-AssignFile(tLesson, 'Jap\JPMonths.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Months and Preps Scene
+  AssignFile(tLesson, 'Jap\JPMonths.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 
 end;
 
 procedure TfrmDash.btnJapNounsClick(Sender: TObject);
 begin
 
-//Load File For Nouns and Preps Scene
-AssignFile(tLesson, 'Jap\JPNouns.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Nouns and Preps Scene
+  AssignFile(tLesson, 'Jap\JPNouns.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 
 end;
 
 procedure TfrmDash.btnJapNumClick(Sender: TObject);
 begin
 
-//Load File For Numbers and Preps Scene
-AssignFile(tLesson, 'Jap\JPNumbers.txt');
-frmLesson.Show;
-frmDash.Hide;
+  // Load File For Numbers and Preps Scene
+  AssignFile(tLesson, 'Jap\JPNumbers.txt');
+  frmLesson.Show;
+  frmDash.Hide;
 
 end;
 
 procedure TfrmDash.Button1Click(Sender: TObject);
 begin
-ShowMessage(frmLogIn.sUser);
+  ShowMessage(frmLogIn.sUser);
 end;
 
 procedure TfrmDash.FormCreate(Sender: TObject);
 begin
-imgBack.SendToBack;
-lblHeader.Caption := ('Good to See you Again, ' + frmLogIn.sUser + ' !') ;
+  imgBack.SendToBack;
+  lblHeader.Caption := ('Good to See you Again, ' + frmLogIn.sUser + ' !');
 end;
-
 
 procedure TfrmDash.imgHelpClick(Sender: TObject);
 begin
-frmDash.Hide;
-frmHelp.Show;
+  frmDash.Hide;
+  frmHelp.Show;
 end;
 
 procedure TfrmDash.imgReturnClick(Sender: TObject);
 begin
-frmDash.Hide;
-frmLogin.show;
+  frmDash.Hide;
+  frmLogIn.Show;
 end;
 
 procedure TfrmDash.imgShopClick(Sender: TObject);
 begin
 
-frmShop.Show ;
-frmDash.Hide;
+  frmShop.Show;
+  frmDash.Hide;
 
 end;
 

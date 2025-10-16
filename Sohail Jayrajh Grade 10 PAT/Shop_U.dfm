@@ -1,9 +1,9 @@
 object frmShop: TfrmShop
   Left = 0
-  Top = 0
+  Top = 8
   Caption = 'frmShop'
-  ClientHeight = 231
-  ClientWidth = 505
+  ClientHeight = 720
+  ClientWidth = 1280
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,32 +11,12 @@ object frmShop: TfrmShop
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesigned
   PixelsPerInch = 96
   TextHeight = 13
-  object lblDays: TLabel
-    Left = 48
-    Top = 40
-    Width = 133
-    Height = 13
-    Caption = 'Japanese Days - 200 Points'
-  end
-  object lblMonths: TLabel
-    Left = 48
-    Top = 80
-    Width = 31
-    Height = 13
-    Caption = 'Label1'
-  end
-  object lblNouns: TLabel
-    Left = 48
-    Top = 120
-    Width = 31
-    Height = 13
-    Caption = 'Label1'
-  end
   object imgReturn: TImage
-    Left = 408
-    Top = 25
+    Left = 88
+    Top = 24
     Width = 65
     Height = 68
     Hint = 'Click to go back'
@@ -9940,34 +9920,16 @@ object frmShop: TfrmShop
     Stretch = True
     OnClick = imgReturnClick
   end
-  object btnBuyDays: TButton
-    Left = 216
-    Top = 35
-    Width = 75
-    Height = 25
-    Caption = 'btnJapBuyDays'
-    TabOrder = 0
-    OnClick = btnBuyDaysClick
-  end
-  object btnBuyMonths: TButton
-    Left = 216
-    Top = 75
-    Width = 75
-    Height = 25
-    Caption = 'btnBuyMonths'
-    TabOrder = 1
-  end
-  object btnBuyNouns: TButton
-    Left = 216
-    Top = 115
-    Width = 75
-    Height = 25
-    Caption = 'btnBuyNouns'
-    TabOrder = 2
+  object lblPrice: TLabel
+    Left = 516
+    Top = 168
+    Width = 80
+    Height = 13
+    Caption = '200 Points each!'
   end
   object redUserInfo: TRichEdit
-    Left = 297
-    Top = 134
+    Left = 977
+    Top = 623
     Width = 185
     Height = 89
     Font.Charset = SHIFTJIS_CHARSET
@@ -9976,6 +9938,82 @@ object frmShop: TfrmShop
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
+    TabOrder = 0
+    Visible = False
+  end
+  object chkJPDays: TCheckBox
+    Left = 312
+    Top = 263
+    Width = 169
+    Height = 17
+    Caption = 'Japanese Days'
+    TabOrder = 1
+  end
+  object chkJPMonths: TCheckBox
+    Left = 312
+    Top = 327
+    Width = 169
+    Height = 17
+    Caption = 'Japanese Months'
+    TabOrder = 2
+  end
+  object chkJPNouns: TCheckBox
+    Left = 312
+    Top = 384
+    Width = 169
+    Height = 17
+    Caption = 'Japanese Nouns'
     TabOrder = 3
+  end
+  object chkAfriNouns: TCheckBox
+    Left = 540
+    Top = 384
+    Width = 173
+    Height = 17
+    Caption = 'Afrikaans Nouns'
+    TabOrder = 4
+  end
+  object chkAfriMonths: TCheckBox
+    Left = 540
+    Top = 327
+    Width = 173
+    Height = 17
+    Caption = 'Afrikaans Months'
+    TabOrder = 5
+  end
+  object chkAfriDays: TCheckBox
+    Left = 540
+    Top = 263
+    Width = 173
+    Height = 17
+    Caption = 'Afrikaans Days'
+    TabOrder = 6
+  end
+  object bntBuy: TButton
+    Left = 472
+    Top = 560
+    Width = 75
+    Height = 25
+    Caption = 'BUY!'
+    TabOrder = 7
+    OnClick = bntBuyClick
+  end
+  object chkJPNum: TCheckBox
+    Left = 312
+    Top = 219
+    Width = 169
+    Height = 17
+    Caption = 'Japanese Numbers'
+    TabOrder = 8
+    Visible = False
+  end
+  object chkAfriNum: TCheckBox
+    Left = 540
+    Top = 219
+    Width = 169
+    Height = 17
+    Caption = 'Afrikaans Numbers'
+    TabOrder = 9
+    Visible = False
   end
 end

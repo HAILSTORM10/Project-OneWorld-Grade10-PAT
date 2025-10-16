@@ -28,27 +28,34 @@ type
     { Private declarations }
   public
     { Public declarations }
+
+
+
   end;
 
-CONST
-  sCorrectMotivation: Array [1 .. 6] of String = ('Good Job1', 'You got it!',
-    'On the money!', 'As expected!', 'Keep it up!', 'Excelsior!');
-  sIncorrectMotivation: Array [1 .. 6] of string = ('Better luck next time!',
-    'Lock in!', 'Skill issue!', 'Keep trying!', 'Don`t give up!', 'Chin up!');
+//CONST
+
 
 var
   frmLesson: TfrmLesson;
   tJPNum: TextFile;
   iNewPoints, iNum: Integer;
   sQuestion, sAnswer, sTest: String;
+  sCorrectMotivation: Array of String;
+
+  sIncorrectMotivation: Array [1 .. 6] of string = ('Better luck next time!',
+    'Lock in!', 'Skill issue!', 'Keep trying!', 'Don`t give up!', 'Chin up!');
 
 implementation
 
-uses LogIn_U, Dashboard_U;
+uses LogIn_U, Dashboard_U, Shop_U;
 {$R *.dfm}
 
 procedure TfrmLesson.btnCheckClick(Sender: TObject);
+Var
+  sUser, sPass: String;
 begin
+
 
   // Check if there are more questions
 
@@ -91,22 +98,42 @@ begin
     frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
     CloseFile(frmDash.tLesson);
 
-//    AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
-//    reset(frmLogIn.tUsin);
-//    redOut.PlainText := True;
-//    redOut.Lines.Add(frmLogIn.sUser);
-//    redOut.Lines.Add(frmLogIn.sPass);
-//    redOut.Lines.Add(IntTOStr(frmLogIn.iPoints));
+
+
+// Save New Point Information
+
+    AssignFile(frmlogin.tUsin, 'Userinfo.txt');
+    Reset(frmlogin.tUsin);
+    frmShop.redUserInfo.PlainText := True;
+
+    frmShop.redUserInfo.Lines.Add(frmlogin.sUser);
+    frmShop.redUserInfo.Lines.Add(frmlogin.sPass);
+    frmShop.redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
+    frmShop.redUserInfo.Lines.Add(frmlogin.sCourses);
+
+    Reset(frmlogin.tUsin);
 
     Repeat
-    begin
+      ReadLN(frmlogin.tUsin, sUser);
+      ReadLN(frmlogin.tUsin, sPass);
+      ReadLN(frmlogin.tUsin, frmlogin.iPoints);
+      ReadLN(frmlogin.tUsin, frmlogin.sCourses);
 
+      if (sUser = frmlogin.sUser) AND (sPass = frmlogin.sPass) then
+      begin
+        frmShop.redUserInfo.PlainText := True;
+      end
+      else
+      begin
+        frmShop.redUserInfo.Lines.Add(sUser);
+        frmShop.redUserInfo.Lines.Add(sPass);
+        frmShop.redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
+        frmShop.redUserInfo.Lines.Add(frmlogin.sCourses);
+      end;
+    Until EOF(frmlogin.tUsin);
 
-
-    end;
-    Until EOF(frmLogIn.tUsin);
-
-      redOut.Lines.Savetofile('Userinfo.txt');
+    CloseFile(frmlogin.tUsin);
+    frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
 
   end;
 

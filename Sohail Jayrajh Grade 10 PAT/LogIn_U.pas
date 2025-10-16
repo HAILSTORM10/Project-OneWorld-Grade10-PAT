@@ -66,7 +66,7 @@ begin
   end
   else
   begin
-    Reset(tUsin);
+    Append(tUsin);
     WriteLN(tUsin, edtUser.Text);
     WriteLN(tUsin, edtPass.Text);
     WriteLN(tUsin, '0');
@@ -85,7 +85,7 @@ begin
   end
   else
   begin
-    AssignFile(tUsin, 'Userinfo.txt'); // Clossed in Shop_U
+    AssignFile(tUsin, 'Userinfo.txt'); // Clossed in Shop_U  No it isn't
     Reset(tUsin);
 
     repeat
@@ -103,6 +103,8 @@ begin
       frmLogIn.Hide;
       frmDash.show;
       frmDash.btnadmin.visible := true;
+      iPoints := 100000;
+      sCourses := '11111111';
 
     end
     else if (sUser = edtUser.Text) And (sPass = edtPass.Text) then
@@ -145,7 +147,7 @@ begin
       ShowMessage('Password is Incorrect!');
     end; // END EVERYTHING
 
-    // CloseFile(tUsin);
+     CloseFile(tUsin);
     frmDash.lblHeader.caption := ('Good to See you Again, ' + sUser + ' !');
     frmDash.lblPoints.caption := ('Points: ' + IntToStr(iPoints));
   end;

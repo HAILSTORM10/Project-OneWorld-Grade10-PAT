@@ -30,14 +30,34 @@ var
 
 implementation
 
-uses LogIn_U, Help_U;
+uses LogIn_U, Help_U, Lesson_U;
 
 {$R *.dfm}
 
 procedure TfrmWelcome.btnGoClick(Sender: TObject);
+Var
+tSetUp : TextFile;
+sLine : Integer;
 begin
 frmWelcome.Hide;
 frmLogIN.Show;
+
+// Adds Feedback to Array in Lesson
+
+// AssignFIle(tSetUp, 'AdCon\PFeedback.txt');
+// Reset(tSetUp);
+//
+//  sCorrectMotivation[1] := 'Good Job!' ;
+//
+// while NOT EOF(tSetUp) do
+// begin
+//  ReadLN(tSetUp, sLine);
+////  sCorrectMotivation[Length(sCorrectMotivation)] := sLine;
+//showmessage(IntToStr(Length(sCorrectMotivation)));
+// end;
+//
+// CloseFile(tSetUP);
+
 end;
 
 procedure TfrmWelcome.Button1Click(Sender: TObject);

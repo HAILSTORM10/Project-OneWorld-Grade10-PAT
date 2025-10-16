@@ -20350,17 +20350,15 @@ object frmLesson: TfrmLesson
   object lblFeedback: TLabel
     Left = 800
     Top = 264
-    Width = 130
+    Width = 8
     Height = 34
-    Caption = 'lblFeedback'
     Visible = False
   end
   object lblNewPoints: TLabel
     Left = 800
     Top = 296
-    Width = 145
+    Width = 8
     Height = 34
-    Caption = 'lblNewPoints'
     Visible = False
   end
   object btnClose: TButton
