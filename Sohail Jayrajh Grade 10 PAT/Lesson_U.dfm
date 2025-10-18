@@ -20443,6 +20443,7 @@ object frmLesson: TfrmLesson
     Font.Name = 'Ink Free'
     Font.Style = []
     ParentFont = False
+    ReadOnly = True
     TabOrder = 5
     Visible = False
   end

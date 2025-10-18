@@ -13,32 +13,45 @@ object frmAdmin: TfrmAdmin
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
-  object btnFeedback: TButton
-    Left = 864
-    Top = 392
+  object btnUsers: TButton
+    Left = 936
+    Top = 360
     Width = 75
     Height = 25
-    Caption = 'btnFeedback'
+    Caption = 'btnUsers'
     TabOrder = 0
-    OnClick = btnFeedbackClick
+    OnClick = btnUsersClick
   end
-  object rgpFeedback: TRadioGroup
-    Left = 816
-    Top = 192
+  object rgpUsers: TRadioGroup
+    Left = 800
+    Top = 80
     Width = 185
     Height = 105
-    Caption = 'Select Type of Feedback To Add:'
-    Items.Strings = (
-      'Correct Answer Feedback'
-      'Incorrect Answer Feedback')
+    Caption = 'Select a User To View Their Details'
     TabOrder = 1
   end
-  object edtFeedback: TEdit
-    Left = 856
-    Top = 336
-    Width = 121
-    Height = 21
+  object btnCustom: TButton
+    Left = 264
+    Top = 160
+    Width = 75
+    Height = 25
+    Caption = 'btnCustom'
     TabOrder = 2
-    Text = 'edtFeedback'
+    OnClick = btnCustomClick
+  end
+  object redOut: TRichEdit
+    Left = 536
+    Top = 240
+    Width = 217
+    Height = 129
+    Font.Charset = SHIFTJIS_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Lines.Strings = (
+      'redOut')
+    ParentFont = False
+    TabOrder = 3
   end
 end

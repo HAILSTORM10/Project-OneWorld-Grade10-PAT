@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, pngimage, ExtCtrls;
+  Dialogs, StdCtrls, pngimage, ExtCtrls, IOUtils;
 
 type
   TfrmWelcome = class(TForm)
@@ -27,53 +27,44 @@ type
 var
   frmWelcome: TfrmWelcome;
 
-
 implementation
 
-uses LogIn_U, Help_U, Lesson_U;
-
+uses LogIn_U, Help_U, Lesson_U, Dashboard_U;
 {$R *.dfm}
 
 procedure TfrmWelcome.btnGoClick(Sender: TObject);
 Var
-tSetUp : TextFile;
-sLine : Integer;
+  tSetUp: TextFile;
+  sLine, path: String;
 begin
-frmWelcome.Hide;
-frmLogIN.Show;
+  frmWelcome.Hide;
+  frmLogIN.Show;
 
-// Adds Feedback to Array in Lesson
+  for path in TDirectory.GetFiles('Custom\') do
+  begin
+    frmdash.cmbCustom.Items.Add(Copy(path, 8, POS('.txt', path) - 4))
+  end;
 
-// AssignFIle(tSetUp, 'AdCon\PFeedback.txt');
-// Reset(tSetUp);
-//
-//  sCorrectMotivation[1] := 'Good Job!' ;
-//
-// while NOT EOF(tSetUp) do
-// begin
-//  ReadLN(tSetUp, sLine);
-////  sCorrectMotivation[Length(sCorrectMotivation)] := sLine;
-//showmessage(IntToStr(Length(sCorrectMotivation)));
-// end;
-//
-// CloseFile(tSetUP);
+
+
+
 
 end;
 
 procedure TfrmWelcome.Button1Click(Sender: TObject);
 begin
-Application.Terminate;
+  Application.Terminate;
 end;
 
 procedure TfrmWelcome.FormCreate(Sender: TObject);
 begin
-imgBack.SendToBack;
+  imgBack.SendToBack;
 end;
 
 procedure TfrmWelcome.imgHelpClick(Sender: TObject);
 begin
-frmWelcome.Hide;
-frmHelp.Show;
+  frmWelcome.Hide;
+  frmHelp.Show;
 end;
 
 end.

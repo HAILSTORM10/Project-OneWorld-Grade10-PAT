@@ -4,14 +4,16 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls;
+  Dialogs, StdCtrls, ExtCtrls, ComCtrls;
 
 type
   TfrmAdmin = class(TForm)
-    btnFeedback: TButton;
-    rgpFeedback: TRadioGroup;
-    edtFeedback: TEdit;
-    procedure btnFeedbackClick(Sender: TObject);
+    btnUsers: TButton;
+    rgpUsers: TRadioGroup;
+    btnCustom: TButton;
+    redOut: TRichEdit;
+    procedure btnUsersClick(Sender: TObject);
+    procedure btnCustomClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,57 +25,95 @@ var
 
 implementation
 
-uses Lesson_U;
+uses Lesson_U, Dashboard_U, LogIn_U;
 {$R *.dfm}
 
-procedure TfrmAdmin.btnFeedbackClick(Sender: TObject);
-Var
-  tFile: TextFile;
+procedure TfrmAdmin.btnCustomClick(Sender: TObject);
+VAR
+  sName, sQues, sAns, sNum, path, sline: String;
+  tNewCourse, tCMBSelection: Textfile;
+  iNum, i: Integer;
 begin
 
+  repeat // Get Name of File
+    sName := InputBox('Create New Course', 'What is the courses Name?', '');
 
+    if FileExists('Custom\' + sName + '.txt') then // Check if it already exists
+    begin
+      ShowMessage('A course with that name already exists!');
+      sName := '';
+    end;
+  until Not(sName = '');
 
+  repeat // Get number of questions
 
-  // Add Items to Feedback in Lesson
+    sNum := InputBox('Create New Course', 'How Many Questions?', '0');
 
-  // if rgpFeedback.ItemIndex < 1 then // If no item selected
-  // begin
-  //
-  // ShowMessage('Please Select Feedback Type');
-  //
-  // end // End No Item
-  // else if rgpFeedback.ItemIndex = 1 then // If Positive selected
-  // begin
-  //
-  //
-  //
-  // end
-  // else
-  // SHowMessage('This Message Already Exists!');
+    for i := 1 to length(sNum) do // Ensure Whole number is given
+    begin
 
-  case rgpFeedback.ItemIndex of
-    1: // If Positive is Chosen
+      if NOT(sNum[i] IN ['0' .. '9']) then
       begin
+        ShowMessage('Please enter a number');
+      end
+      else
+        iNum := StrToInt(sNum);
+    end;
 
-        AssignFile(tFile, 'Admin Config\Positive Feedback.txt');
+  until (iNum > 0); // Must be > than zero
 
-        if Not FileExists('Admin Config\Positive Feedback.txt') then
-        begin
+  AssignFIle(tNewCourse, 'Custom\' + sName + '.txt');
+  // Create file and prep for writing
+  Rewrite(tNewCourse);
 
-          Rewrite(tFile);
-          WriteLN(tFile, edtFeedback.text);
+  for i := 1 to iNum do
+  begin
 
-        end
-        else
-        begin
+    repeat // Get Question and Ensure it's not blank
+      sQues := InputBox('Create New Course', 'What is the Question?', '');
+    until Not(sQues = '');
 
-          Append(tFile);
-          WriteLN(tFile, edtFeedback.text);
+    WriteLN(tNewCourse, sQues);
 
-        end;
-      end; // END Case 1
+    repeat // Get Question and Ensure it's not blank
+      sAns := InputBox('Create New Course', 'What is the Answer?', '');
+    until Not(sAns = '');
 
-  end; // End Process
+    WriteLN(tNewCourse, UpperCase(sAns))
+
+  end;
+
+  CloseFile(tNewCourse);
+
+  frmdash.cmbCustom.Items.Add(sName + '.txt');
+
+end;
+
+procedure TfrmAdmin.btnUsersClick(Sender: TObject);
+Var
+  tFile: Textfile;
+begin
+
+  AssignFIle(frmlogIn.tUsIN, 'UserInfo.txt');
+  Reset(frmlogIn.tUsIN);
+
+  repeat
+    ReadLN(frmlogIn.tUsIN, frmlogIn.sUser);
+    ReadLN(frmlogIn.tUsIN, frmlogIn.sPass);
+    ReadLN(frmlogIn.tUsIN, frmlogIn.iPoints);
+    ReadLN(frmlogIn.tUsIN, frmlogIn.sCourses);
+  until frmlogIn.sUser = rgpUsers.Items[rgpUsers.itemindex];
+
+  with redOut do
+  begin
+    Lines.Clear;
+    Lines.Add('Username: ' + #9 + frmlogIn.sUser);
+    Lines.Add('Password: ' + #9 + frmlogIn.sPass);
+    Lines.Add('Points: ' + #9 + #9 + IntToStr(frmlogIn.iPoints));
+    Lines.Add('Password: ' + #9 + frmlogIn.sCourses);
+  end;
+
+  CloseFile(frmlogIn.tUsIN);
 
 end;
 

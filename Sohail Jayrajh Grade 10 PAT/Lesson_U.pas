@@ -29,21 +29,18 @@ type
   public
     { Public declarations }
 
-
-
   end;
 
-//CONST
-
+  // CONST
 
 var
   frmLesson: TfrmLesson;
-  tJPNum: TextFile;
+  // tJPNum: TextFile;
   iNewPoints, iNum: Integer;
   sQuestion, sAnswer, sTest: String;
-  sCorrectMotivation: Array of String;
-
-  sIncorrectMotivation: Array [1 .. 6] of string = ('Better luck next time!',
+  sCorrectMotivation: Array [1 .. 6] of String = ('Good Job!', 'You got it!',
+    'On the money!', 'As expected!', 'Keep it up!', 'Excelsior!');
+  sIncorrectMotivation: Array [1 .. 6] of String = ('Better Luck Next Time!',
     'Lock in!', 'Skill issue!', 'Keep trying!', 'Don`t give up!', 'Chin up!');
 
 implementation
@@ -54,6 +51,7 @@ uses LogIn_U, Dashboard_U, Shop_U;
 procedure TfrmLesson.btnCheckClick(Sender: TObject);
 Var
   sUser, sPass: String;
+  tFeedback: TextFile;
 begin
 
 
@@ -69,11 +67,13 @@ begin
       lblFeedback.Caption := sCorrectMotivation[iNum];
       INC(iNewPoints, 10);
       lblNewPoints.Caption := 'Points: + ' + IntTOStr(iNewPoints);
-    end // END IF Correct
-    else
+    end
+    // END IF Correct
+    else // If cincorrect
     begin
       lblFeedback.Caption := sIncorrectMotivation[iNum];
-    end; // END Answer Check
+    end;
+    // END Answer Check
 
     edtAns.Clear;
     ReadLN(frmDash.tLesson, sQuestion);
@@ -100,26 +100,26 @@ begin
 
 
 
-// Save New Point Information
+    // Save New Point Information
 
-    AssignFile(frmlogin.tUsin, 'Userinfo.txt');
-    Reset(frmlogin.tUsin);
+    AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
+    Reset(frmLogIn.tUsin);
     frmShop.redUserInfo.PlainText := True;
 
-    frmShop.redUserInfo.Lines.Add(frmlogin.sUser);
-    frmShop.redUserInfo.Lines.Add(frmlogin.sPass);
-    frmShop.redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
-    frmShop.redUserInfo.Lines.Add(frmlogin.sCourses);
+    frmShop.redUserInfo.Lines.Add(frmLogIn.sUser);
+    frmShop.redUserInfo.Lines.Add(frmLogIn.sPass);
+    frmShop.redUserInfo.Lines.Add(IntTOStr(frmLogIn.iPoints));
+    frmShop.redUserInfo.Lines.Add(frmLogIn.sCourses);
 
-    Reset(frmlogin.tUsin);
+    Reset(frmLogIn.tUsin);
 
     Repeat
-      ReadLN(frmlogin.tUsin, sUser);
-      ReadLN(frmlogin.tUsin, sPass);
-      ReadLN(frmlogin.tUsin, frmlogin.iPoints);
-      ReadLN(frmlogin.tUsin, frmlogin.sCourses);
+      ReadLN(frmLogIn.tUsin, sUser);
+      ReadLN(frmLogIn.tUsin, sPass);
+      ReadLN(frmLogIn.tUsin, frmLogIn.iPoints);
+      ReadLN(frmLogIn.tUsin, frmLogIn.sCourses);
 
-      if (sUser = frmlogin.sUser) AND (sPass = frmlogin.sPass) then
+      if (sUser = frmLogIn.sUser) AND (sPass = frmLogIn.sPass) then
       begin
         frmShop.redUserInfo.PlainText := True;
       end
@@ -127,12 +127,12 @@ begin
       begin
         frmShop.redUserInfo.Lines.Add(sUser);
         frmShop.redUserInfo.Lines.Add(sPass);
-        frmShop.redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
-        frmShop.redUserInfo.Lines.Add(frmlogin.sCourses);
+        frmShop.redUserInfo.Lines.Add(IntTOStr(frmLogIn.iPoints));
+        frmShop.redUserInfo.Lines.Add(frmLogIn.sCourses);
       end;
-    Until EOF(frmlogin.tUsin);
+    Until EOF(frmLogIn.tUsin);
 
-    CloseFile(frmlogin.tUsin);
+    CloseFile(frmLogIn.tUsin);
     frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
 
   end;
@@ -149,7 +149,7 @@ begin
 
   redOut.Clear;
   redOut.Visible := True;
-  reset(frmDash.tLesson);
+  Reset(frmDash.tLesson);
 
   while Not EOF(frmDash.tLesson) do
   begin
@@ -170,8 +170,7 @@ begin
   lblFeedback.Visible := True;
   lblNewPoints.Visible := True;
 
-
-  reset(frmDash.tLesson);
+  Reset(frmDash.tLesson);
   ReadLN(frmDash.tLesson, sQuestion);
   ReadLN(frmDash.tLesson, sAnswer);
   lblQues.Caption := sQuestion;
@@ -184,8 +183,21 @@ end;
 
 procedure TfrmLesson.imgReturnClick(Sender: TObject);
 begin
+
+  // Reset Lesson form for later use
+
   frmLesson.Hide;
   frmDash.Show;
+
+  btnStart.Visible := True;
+  btnLearn.Visible := True;
+  btnCheck.Visible := False;
+  frmLesson.btnCheck.Hide;
+  frmLesson.edtAns.Hide;
+  frmLesson.lblQues.Hide;
+  frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
+  frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
+  CloseFile(frmDash.tLesson);
 end;
 
 end.

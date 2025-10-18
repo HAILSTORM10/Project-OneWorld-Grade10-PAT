@@ -51,29 +51,79 @@ begin
 end;
 
 procedure TfrmLogIn.btnCreateClick(Sender: TObject);
+VAR
+  iSpecial: Integer;
+  bAllowed: Boolean;
 begin
 
-  AssignFile(tUsin, 'Userinfo.txt');
+  Repeat
 
-  if NOT FILEEXISTS('Userinfo.txt') then
+    sUser := InputBox('Create a User', 'What is your name?', '');
+
+    for i := 1 to Length(sUser) do
+    begin
+
+      if NOT(sUser[i] IN ['A' .. 'Z', 'a' .. 'z', ' ']) then
+      begin // Yes
+        ShowMessage('Username cannot contain special characters!');
+        bAllowed := False;
+      end
+      else
+      begin
+        bAllowed := True;
+      end;
+    end;
+
+  Until bAllowed = True;
+
+  repeat
   begin
+
+    sPass := InputBox('Create a User', 'What is your password?', '');
+
+    if Length(sPass) <= 8 then // Password Longer (or equal) than 8?
+    begin // Yes
+
+      ShowMessage('Password must be atleast 8 characters!');
+      // sPass := ' ';
+
+    end; // End Password check
+
+    for i := 1 to Length(sPass) do // Special Characters Check
+    begin
+
+      if NOT(sPass[i] IN ['A' .. 'Z', 'a' .. 'z']) then
+      begin
+        bAllowed := True;
+      end
+      else
+      begin
+        bAllowed := False;
+      end;
+    end; // END FOR Special Check
+
+  end;
+  until bAllowed = True; // END Pass While
+
+  AssignFile(tUsin, 'Userinfo.txt'); // Start Saving User Details
+
+  if NOT FILEEXISTS('Userinfo.txt') then // File Exists?
+  begin // No, Create it
     Rewrite(tUsin);
-    WriteLN(tUsin, edtUser.Text);
-    WriteLN(tUsin, edtPass.Text);
-    WriteLN(tUsin, '0');
-    WriteLN(tUsin, '10001000');
-    ShowMessage('User Succesfully Created');
   end
   else
-  begin
+  begin // Yes, add to it
     Append(tUsin);
-    WriteLN(tUsin, edtUser.Text);
-    WriteLN(tUsin, edtPass.Text);
-    WriteLN(tUsin, '0');
-    WriteLN(tUsin, '10001000');
-    ShowMessage('User Succesfully Created');
-  end;
+  end; // End if Exists
+
+  WriteLN(tUsin, sUser);
+  WriteLN(tUsin, sPass);
+  WriteLN(tUsin, '0');
+  WriteLN(tUsin, '10001000');
+  ShowMessage('User Succesfully Created');
+
   CloseFile(tUsin);
+
 end;
 
 procedure TfrmLogIn.btnLoginClick(Sender: TObject);
@@ -93,21 +143,21 @@ begin
       ReadLN(tUsin, sPass);
       ReadLN(tUsin, iPoints);
       ReadLN(tUsin, sCourses);
-    until (EOF(tUsin)) OR (sUser = edtUser.Text) AND (sPass = edtPass.Text);
+    until (EOF(tUsin)) OR (sUser = edtUser.text) AND (sPass = edtPass.text);
 
     // Admin Check
 
-    if (edtUser.Text = 'Admin') AND (edtPass.Text = 'Admin@123') then
+    if (edtUser.text = 'Admin') AND (edtPass.text = 'Admin@123') then
     begin
       ShowMessage('You got it, boss!');
       frmLogIn.Hide;
       frmDash.show;
-      frmDash.btnadmin.visible := true;
+      frmDash.btnadmin.visible := True;
       iPoints := 100000;
       sCourses := '11111111';
 
     end
-    else if (sUser = edtUser.Text) And (sPass = edtPass.Text) then
+    else if (sUser = edtUser.text) And (sPass = edtPass.text) then
     // Normal user Check
     begin
       ShowMessage('Succsess!');
@@ -129,7 +179,7 @@ begin
       begin
         if sCourses[i] = '1' then
         begin
-          sAvailableCourses[i].visible := true;
+          sAvailableCourses[i].visible := True;
         end
         else
         begin
@@ -138,7 +188,7 @@ begin
       end; // End Course Check
 
     end // END EXIST CHECK IF
-    else if Not(sUser = edtUser.Text) then
+    else if Not(sUser = edtUser.text) then
     begin
       ShowMessage('Username Does Not Exist!');
     end
@@ -147,7 +197,7 @@ begin
       ShowMessage('Password is Incorrect!');
     end; // END EVERYTHING
 
-     CloseFile(tUsin);
+    CloseFile(tUsin);
     frmDash.lblHeader.caption := ('Good to See you Again, ' + sUser + ' !');
     frmDash.lblPoints.caption := ('Points: ' + IntToStr(iPoints));
   end;

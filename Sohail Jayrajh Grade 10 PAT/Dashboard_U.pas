@@ -64,8 +64,26 @@ uses Help_U, LogIn_U, Lesson_U, Shop_U, Admin_U;
 procedure TfrmDash.btnAdminClick(Sender: TObject);
 begin
 
-frmAdmin.show;
+  frmAdmin.show;
 
+  // Preps rgpUsers
+
+  AssignFile(frmlogIn.tUsIN, 'UserInfo.txt');
+  Reset(frmlogIn.tUsIN);
+
+  while NOT EOF(frmlogIn.tUsIN) do
+  begin
+
+    ReadLN(frmlogin.tUsIN, frmlogin.sUser);
+    ReadLN(frmlogin.tUsIN, frmlogin.sPass);
+    ReadLN(frmlogin.tUsIN, frmlogin.iPoints);
+    ReadLN(frmlogin.tUsIN, frmlogin.sCourses);
+
+    frmadmin.rgpUsers.items.add(frmlogin.sUser);      // Puts Users in radio group
+
+  end;
+
+  CloseFile(frmlogin.tUsIN);
 
 end;
 
@@ -73,7 +91,7 @@ procedure TfrmDash.btnAfriDaysClick(Sender: TObject);
 begin
   // Load File For Days and Preps Scene
   AssignFile(tLesson, 'Afri\AfriDays.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 end;
 
@@ -82,7 +100,7 @@ begin
 
   // Load File For Months and Preps Scene
   AssignFile(tLesson, 'Afri\AfriMonths.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 
 end;
@@ -91,7 +109,7 @@ procedure TfrmDash.btnAfriNounsClick(Sender: TObject);
 begin
   // Load File For Nouns and Preps Scene
   AssignFile(tLesson, 'Afri\AfriNouns.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 
 end;
@@ -100,7 +118,7 @@ procedure TfrmDash.btnAfriNumClick(Sender: TObject);
 begin
   // Load File For Numbers and Preps Scene
   AssignFile(tLesson, 'Afri\AfriNumbers.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 end;
 
@@ -114,12 +132,12 @@ VAR
   sCustomLesson: String;
 begin
 
-// Loads file For a custom lesson
+  // Loads file For a custom lesson
 
-  AssignFile(tLesson,
-    'Custom\' + cmbCustom.Items[cmbCustom.ItemIndex] + '.txt');
-  frmLesson.Show;
+  AssignFile(tLesson, 'Custom\' + cmbCustom.Items[cmbCustom.ItemIndex]);
+  frmLesson.show;
   frmDash.Hide;
+
 end;
 
 procedure TfrmDash.btnJapDaysClick(Sender: TObject);
@@ -127,7 +145,7 @@ begin
 
   // Load File For Days and Preps Scene
   AssignFile(tLesson, 'Jap\JPDays.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 end;
 
@@ -136,7 +154,7 @@ begin
 
   // Load File For Months and Preps Scene
   AssignFile(tLesson, 'Jap\JPMonths.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 
 end;
@@ -146,7 +164,7 @@ begin
 
   // Load File For Nouns and Preps Scene
   AssignFile(tLesson, 'Jap\JPNouns.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 
 end;
@@ -156,38 +174,38 @@ begin
 
   // Load File For Numbers and Preps Scene
   AssignFile(tLesson, 'Jap\JPNumbers.txt');
-  frmLesson.Show;
+  frmLesson.show;
   frmDash.Hide;
 
 end;
 
 procedure TfrmDash.Button1Click(Sender: TObject);
 begin
-  ShowMessage(frmLogIn.sUser);
+  ShowMessage(frmlogIn.sUser);
 end;
 
 procedure TfrmDash.FormCreate(Sender: TObject);
 begin
   imgBack.SendToBack;
-  lblHeader.Caption := ('Good to See you Again, ' + frmLogIn.sUser + ' !');
+  lblHeader.Caption := ('Good to See you Again, ' + frmlogIn.sUser + ' !');
 end;
 
 procedure TfrmDash.imgHelpClick(Sender: TObject);
 begin
   frmDash.Hide;
-  frmHelp.Show;
+  frmHelp.show;
 end;
 
 procedure TfrmDash.imgReturnClick(Sender: TObject);
 begin
   frmDash.Hide;
-  frmLogIn.Show;
+  frmlogIn.show;
 end;
 
 procedure TfrmDash.imgShopClick(Sender: TObject);
 begin
 
-  frmShop.Show;
+  frmShop.show;
   frmDash.Hide;
 
 end;

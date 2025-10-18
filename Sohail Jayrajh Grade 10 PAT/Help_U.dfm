@@ -11141,6 +11141,7 @@ object frmHelp: TfrmHelp
         '  Your Hompage where you will find a variety of tools to aid in ' +
         'your educational journey as well as interesting statistics.')
     ParentFont = False
+    ReadOnly = True
     TabOrder = 1
   end
   object btnClose: TButton
