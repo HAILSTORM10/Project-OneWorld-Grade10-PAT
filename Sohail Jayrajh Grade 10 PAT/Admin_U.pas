@@ -12,8 +12,10 @@ type
     rgpUsers: TRadioGroup;
     btnCustom: TButton;
     redOut: TRichEdit;
+    btnClose: TButton;
     procedure btnUsersClick(Sender: TObject);
     procedure btnCustomClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,6 +29,11 @@ implementation
 
 uses Lesson_U, Dashboard_U, LogIn_U;
 {$R *.dfm}
+
+procedure TfrmAdmin.btnCloseClick(Sender: TObject);
+begin
+  frmAdmin.Hide;
+end;
 
 procedure TfrmAdmin.btnCustomClick(Sender: TObject);
 VAR
@@ -92,25 +99,27 @@ end;
 procedure TfrmAdmin.btnUsersClick(Sender: TObject);
 Var
   tFile: Textfile;
+  sUser, sPass, sCourses: String;
+  iPoints: Integer;
 begin
 
   AssignFIle(frmlogIn.tUsIN, 'UserInfo.txt');
   Reset(frmlogIn.tUsIN);
 
   repeat
-    ReadLN(frmlogIn.tUsIN, frmlogIn.sUser);
-    ReadLN(frmlogIn.tUsIN, frmlogIn.sPass);
-    ReadLN(frmlogIn.tUsIN, frmlogIn.iPoints);
-    ReadLN(frmlogIn.tUsIN, frmlogIn.sCourses);
+    ReadLN(frmlogIn.tUsIN, sUser);
+    ReadLN(frmlogIn.tUsIN, sPass);
+    ReadLN(frmlogIn.tUsIN, iPoints);
+    ReadLN(frmlogIn.tUsIN, sCourses);
   until frmlogIn.sUser = rgpUsers.Items[rgpUsers.itemindex];
 
   with redOut do
   begin
     Lines.Clear;
-    Lines.Add('Username: ' + #9 + frmlogIn.sUser);
-    Lines.Add('Password: ' + #9 + frmlogIn.sPass);
-    Lines.Add('Points: ' + #9 + #9 + IntToStr(frmlogIn.iPoints));
-    Lines.Add('Password: ' + #9 + frmlogIn.sCourses);
+    Lines.Add('Username: ' + #9 + sUser);
+    Lines.Add('Password: ' + #9 + sPass);
+    Lines.Add('Points: ' + #9 + #9 + IntToStr(iPoints));
+    Lines.Add('Password: ' + #9 + sCourses);
   end;
 
   CloseFile(frmlogIn.tUsIN);

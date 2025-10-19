@@ -43022,7 +43022,7 @@ object frmLogIn: TfrmLogIn
     Caption = 'Log Me In'
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 0
+    TabOrder = 2
     OnClick = btnLoginClick
   end
   object edtUser: TEdit
@@ -43036,7 +43036,7 @@ object frmLogIn: TfrmLogIn
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 1
+    TabOrder = 0
     TextHint = 'Enter Your Username'
   end
   object edtPass: TEdit
@@ -43050,7 +43050,7 @@ object frmLogIn: TfrmLogIn
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
-    TabOrder = 2
+    TabOrder = 1
     TextHint = 'Enter Your Password'
   end
   object btnClose: TButton
@@ -43059,7 +43059,7 @@ object frmLogIn: TfrmLogIn
     Width = 75
     Height = 25
     Caption = 'Close The App'
-    TabOrder = 3
+    TabOrder = 4
     OnClick = btnCloseClick
   end
   object btnCreate: TButton
@@ -43068,10 +43068,10 @@ object frmLogIn: TfrmLogIn
     Width = 97
     Height = 25
     Hint = 'This Button Will Create a User With The Above Creditentials'
-    Caption = 'Create This User'
+    Caption = 'Create A User'
     ParentShowHint = False
     ShowHint = True
-    TabOrder = 4
+    TabOrder = 3
     OnClick = btnCreateClick
   end
 end

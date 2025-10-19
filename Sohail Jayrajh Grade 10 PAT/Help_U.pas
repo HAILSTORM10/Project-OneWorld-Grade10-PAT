@@ -9,9 +9,23 @@ uses
 type
   TfrmHelp = class(TForm)
     btnClose: TButton;
-    redHelp: TRichEdit;
+    redGeneral: TRichEdit;
     imgBack: TImage;
     imgHelp: TImage;
+    pgcHelp: TPageControl;
+    General: TTabSheet;
+    Welcome: TTabSheet;
+    redWelcome: TRichEdit;
+    LogIn: TTabSheet;
+    redLogin: TRichEdit;
+    TabSheet1: TTabSheet;
+    Lessons: TTabSheet;
+    Shop: TTabSheet;
+    TabSheet2: TTabSheet;
+    redDash: TRichEdit;
+    redLesson: TRichEdit;
+    redShop: TRichEdit;
+    redAdmin: TRichEdit;
     procedure btnCloseClick(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
   private

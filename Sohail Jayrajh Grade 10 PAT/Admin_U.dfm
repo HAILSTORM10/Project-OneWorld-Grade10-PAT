@@ -54,4 +54,19 @@ object frmAdmin: TfrmAdmin
     ParentFont = False
     TabOrder = 3
   end
+  object btnClose: TButton
+    Left = 1189
+    Top = 8
+    Width = 75
+    Height = 25
+    Caption = 'Close Window'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    OnClick = btnCloseClick
+  end
 end

@@ -20338,9 +20338,10 @@ object frmLesson: TfrmLesson
       5430363A30303A30332B30303A303007AC15100000000049454E44AE426082}
     ShowHint = True
     Stretch = True
+    OnClick = imgHelpClick
   end
   object lblQues: TLabel
-    Left = 528
+    Left = 504
     Top = 184
     Width = 49
     Height = 34
@@ -20377,16 +20378,16 @@ object frmLesson: TfrmLesson
     OnClick = btnCloseClick
   end
   object edtAns: TEdit
-    Left = 496
-    Top = 288
-    Width = 121
+    Left = 432
+    Top = 280
+    Width = 177
     Height = 42
     TabOrder = 1
-    Text = 'edtAns'
+    TextHint = 'Enter annswer here'
     Visible = False
   end
   object btnCheck: TButton
-    Left = 470
+    Left = 478
     Top = 384
     Width = 75
     Height = 25

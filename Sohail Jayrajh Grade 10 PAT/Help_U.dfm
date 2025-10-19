@@ -2,7 +2,7 @@ object frmHelp: TfrmHelp
   Left = 0
   Top = 0
   Caption = 'Help'
-  ClientHeight = 720
+  ClientHeight = 719
   ClientWidth = 1280
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object frmHelp: TfrmHelp
   TextHeight = 13
   object imgBack: TImage
     Left = -8
-    Top = -40
+    Top = -8
     Width = 1289
     Height = 761
     Center = True
@@ -11095,55 +11095,6 @@ object frmHelp: TfrmHelp
     Stretch = True
     OnClick = imgHelpClick
   end
-  object redHelp: TRichEdit
-    Left = 176
-    Top = 80
-    Width = 857
-    Height = 569
-    Font.Charset = SHIFTJIS_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    Lines.Strings = (
-      'Hello There!'
-      ''
-      
-        'This is an application designed to aid you in your journery thro' +
-        'ugh the world of language learning.'
-      ''
-      
-        'Disclaimer: I am far from native in either offered language. The' +
-        're is bound to be mistakes, especially in spelling or '
-      'grammer.'
-      ''
-      
-        'The program can be exited at anytime using the "Close The App" b' +
-        'utton located on the top right.'
-      'The blue question mark in the top left brings you here.'
-      ''
-      'Welcome Screen:'
-      '  A quick welcome. '
-      '  Click the '#39'Let'#39's Go!'#39' button to continue to the login Screen'
-      ''
-      'Login Screen:'
-      '  A place to enter your login credentials in the given boxes.'
-      '  Click the "Log Me In!" button to validate your credentials.'
-      
-        '  You will be told the login was a success and be taken to the D' +
-        'ashboard Screen.'
-      
-        '  If there is a problem, an explanatory error message will appea' +
-        'r.'
-      ''
-      'Dashboard Screen:'
-      
-        '  Your Hompage where you will find a variety of tools to aid in ' +
-        'your educational journey as well as interesting statistics.')
-    ParentFont = False
-    ReadOnly = True
-    TabOrder = 1
-  end
   object btnClose: TButton
     Left = 1197
     Top = 8
@@ -11152,5 +11103,232 @@ object frmHelp: TfrmHelp
     Caption = 'Close The App'
     TabOrder = 0
     OnClick = btnCloseClick
+  end
+  object pgcHelp: TPageControl
+    Left = 232
+    Top = 152
+    Width = 761
+    Height = 361
+    ActivePage = TabSheet2
+    TabOrder = 1
+    object General: TTabSheet
+      Caption = 'General'
+      ExplicitWidth = 757
+      object redGeneral: TRichEdit
+        Left = -4
+        Top = 0
+        Width = 761
+        Height = 337
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Hello There!'
+          ''
+          
+            'This is an application designed to aid you in your journery thro' +
+            'ugh the world of language learning.'
+          ''
+          
+            'Disclaimer: I am far from native in either offered language. The' +
+            're is bound to be mistakes.'
+          ''
+          
+            'The program can be exited at anytime using the "Close The App" b' +
+            'utton located on the top right.'
+          'The question mark in the top left brings you here.'
+          
+            'Following after the help button is the Back button which returns' +
+            ' you to the previous page.')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object Welcome: TTabSheet
+      Caption = 'Welcome'
+      ImageIndex = 1
+      object redWelcome: TRichEdit
+        Left = -4
+        Top = 0
+        Width = 761
+        Height = 344
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Welcome Screen:'
+          '  A quick welcome. '
+          '  Click the '#39'Let'#39's Go!'#39' button to continue to the login Screen')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object LogIn: TTabSheet
+      Caption = 'LogIn'
+      ImageIndex = 2
+      object redLogin: TRichEdit
+        Left = -4
+        Top = 0
+        Width = 761
+        Height = 337
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Login Screen:'
+          '  A place to enter your login credentials in the given boxes.'
+          '  Click the "Log Me In!" button to validate your credentials.'
+          
+            '  You will be told the login was a success and be taken to the D' +
+            'ashboard Screen.'
+          
+            '  If there is a problem, an explanatory error message will appea' +
+            'r.')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object TabSheet1: TTabSheet
+      Caption = 'Dashboard'
+      ImageIndex = 3
+      object redDash: TRichEdit
+        Left = -4
+        Top = 0
+        Width = 761
+        Height = 344
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Dashboard Screen:'
+          '  Your Hompage where you will find your Lessons'
+          '  Clicking on an available course will start that lesson'
+          
+            '  Custom courses can be created by you friendly neighbourhood ad' +
+            'ministrator'
+          
+            '  Simple choose your custom course from the dropdown and press t' +
+            'he "Load" button'
+          
+            '  You'#39'll find the shop button and you available points on the bo' +
+            'ttom right.'
+          
+            '  Points are accumulated in the lessons and can be spent in the ' +
+            'shop to buy more courses')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object Lessons: TTabSheet
+      Caption = 'Lessons'
+      ImageIndex = 4
+      object redLesson: TRichEdit
+        Left = -4
+        Top = -7
+        Width = 761
+        Height = 344
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Lessons Screen:'
+          '  Where the magic happens!'
+          '  The "Start"  button to your left will begin the quiz '
+          
+            '  Pressing the "Learn" button reveals the question and answers t' +
+            'o the lesson for you to study'
+          
+            '  A word in the target language will be displayed and you must g' +
+            'ive the correct translation'
+          
+            '  Enter your answer into the space provided below the question a' +
+            'nd press the "check" button'
+          '  If you answered correctly, you will be awarded points'
+          
+            '  This program is case insensitive, meaning you don'#39't have to wo' +
+            'rry about Capital letters!')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object Shop: TTabSheet
+      Caption = 'Shop'
+      ImageIndex = 5
+      object redShop: TRichEdit
+        Left = -4
+        Top = -7
+        Width = 761
+        Height = 344
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Shop Screen:'
+          '  Here you can spend your hard-earned points to buy new courses!'
+          '  Each course costs 200 points'
+          
+            '  Tick the checkboxes of the courses you want to buy then press ' +
+            'the "Buy" Button'
+          
+            '  You can now leave the shop with the back button on the top rig' +
+            'ht and try out your new courses'
+          '')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object TabSheet2: TTabSheet
+      Caption = 'Admin'
+      ImageIndex = 6
+      object redAdmin: TRichEdit
+        Left = -4
+        Top = -7
+        Width = 761
+        Height = 344
+        Font.Charset = SHIFTJIS_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
+        Lines.Strings = (
+          'Admin Mode:'
+          
+            '  The Administrator account can be logged in with the following ' +
+            'details'
+          '  Username: Admin'
+          '  Password: Admin@123'
+          ''
+          'This mode enable use of the admin screen'
+          ''
+          'Admin Screen:'
+          
+            ' From here you can create new courses with the button on your le' +
+            'ft'
+          
+            ' You can view the information of users using the tools on your r' +
+            'ight.')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
   end
 end

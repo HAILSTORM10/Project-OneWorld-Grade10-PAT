@@ -9921,7 +9921,7 @@ object frmShop: TfrmShop
     OnClick = imgReturnClick
   end
   object lblPrice: TLabel
-    Left = 516
+    Left = 444
     Top = 168
     Width = 80
     Height = 13
@@ -9990,7 +9990,7 @@ object frmShop: TfrmShop
     TabOrder = 6
   end
   object bntBuy: TButton
-    Left = 472
+    Left = 449
     Top = 560
     Width = 75
     Height = 25

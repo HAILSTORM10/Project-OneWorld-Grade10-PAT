@@ -31,7 +31,8 @@ type
 
 var
   frmShop: TfrmShop;
-  test : integer;
+//  test: integer;
+  sChkBoxes: array [1 .. 8] of TCheckBox;
 
 implementation
 
@@ -41,23 +42,10 @@ uses LogIn_U, Dashboard_U;
 procedure TfrmShop.bntBuyClick(Sender: TObject);
 VAR
   sUser, sPass, sCourses: String;
-  i, iPoints: Integer;
-  sChkBoxes: array [1 .. 8] of TCheckBox;
+  i, iPoints: integer;
 
 begin
 
-
-
-  // Adds Check Boxes to Array
-
-  sChkBoxes[1] := chkJPNum;
-  sChkBoxes[2] := chkJPDays;
-  sChkBoxes[3] := chkJPMonths;
-  sChkBoxes[4] := chkJPNouns;
-  sChkBoxes[5] := chkAfriNum;
-  sChkBoxes[6] := chkAfriDays;
-  sChkBoxes[7] := chkAfriMonths;
-  sChkBoxes[8] := chkAfriNouns;
 
   redUserInfo.Clear;
   sUser := frmlogin.sUser;
@@ -73,8 +61,10 @@ begin
 
       if frmlogin.iPoints >= 200 then // Check if user Has enough points
       begin
+
         frmlogin.iPoints := frmlogin.iPoints - 200;
         frmlogin.sCourses[i] := '1';
+
       end
       else
       begin

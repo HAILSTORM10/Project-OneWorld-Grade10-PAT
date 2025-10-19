@@ -1,3 +1,4 @@
 https://stackoverflow.com/questions/3027561/delphi-how-to-get-a-list-of-all-files-of-directory
 https://www.delphibasics.co.uk/Article.php?Name=Arrays
 https://docwiki.embarcadero.com/RADStudio/Athens/en/Structured_Types_(Delphi)
+https://docwiki.embarcadero.com/RADStudio/Sydney/en/Page_Controls

@@ -67,6 +67,7 @@ begin
       begin // Yes
         ShowMessage('Username cannot contain special characters!');
         bAllowed := False;
+        Break;
       end
       else
       begin
@@ -76,34 +77,41 @@ begin
 
   Until bAllowed = True;
 
+  iSpecial := 0;
+
   repeat
   begin
 
     sPass := InputBox('Create a User', 'What is your password?', '');
 
-    if Length(sPass) <= 8 then // Password Longer (or equal) than 8?
+    if Length(sPass) < 8 then // Password Longer (or equal) than 8?
     begin // Yes
 
       ShowMessage('Password must be atleast 8 characters!');
-      // sPass := ' ';
 
-    end; // End Password check
-
-    for i := 1 to Length(sPass) do // Special Characters Check
+    end // End Password Length check
+    else
     begin
 
-      if NOT(sPass[i] IN ['A' .. 'Z', 'a' .. 'z']) then
+      for i := 1 to Length(sPass) do // Special Characters Check
       begin
-        bAllowed := True;
-      end
-      else
+
+        if NOT(sPass[i] IN ['A' .. 'Z', 'a' .. 'z']) then
+        begin
+          inc(iSpecial);
+        end;
+
+      end; // END FOR Special Check
+
+      if NOT(iSpecial > 0) then
       begin
-        bAllowed := False;
+        ShowMessage('Password must contain atlease 1 special character!');
       end;
-    end; // END FOR Special Check
+
+    end; // End Whole Password IF
 
   end;
-  until bAllowed = True; // END Pass While
+  until iSpecial > 0; // END Pass While
 
   AssignFile(tUsin, 'Userinfo.txt'); // Start Saving User Details
 

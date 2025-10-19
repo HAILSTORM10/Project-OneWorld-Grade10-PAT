@@ -62,6 +62,9 @@ uses Help_U, LogIn_U, Lesson_U, Shop_U, Admin_U;
 {$R *.dfm}
 
 procedure TfrmDash.btnAdminClick(Sender: TObject);
+VAr
+  sUser, sPass, sCourses: String;
+  iPoints: integer;
 begin
 
   frmAdmin.show;
@@ -74,16 +77,16 @@ begin
   while NOT EOF(frmlogIn.tUsIN) do
   begin
 
-    ReadLN(frmlogin.tUsIN, frmlogin.sUser);
-    ReadLN(frmlogin.tUsIN, frmlogin.sPass);
-    ReadLN(frmlogin.tUsIN, frmlogin.iPoints);
-    ReadLN(frmlogin.tUsIN, frmlogin.sCourses);
+    ReadLN(frmlogIn.tUsIN, sUser);
+    ReadLN(frmlogIn.tUsIN, sPass);
+    ReadLN(frmlogIn.tUsIN, iPoints);
+    ReadLN(frmlogIn.tUsIN, sCourses);
 
-    frmadmin.rgpUsers.items.add(frmlogin.sUser);      // Puts Users in radio group
+    frmAdmin.rgpUsers.items.add(sUser); // Puts Users in radio group
 
   end;
 
-  CloseFile(frmlogin.tUsIN);
+  CloseFile(frmlogIn.tUsIN);
 
 end;
 
@@ -134,7 +137,7 @@ begin
 
   // Loads file For a custom lesson
 
-  AssignFile(tLesson, 'Custom\' + cmbCustom.Items[cmbCustom.ItemIndex]);
+  AssignFile(tLesson, 'Custom\' + cmbCustom.items[cmbCustom.ItemIndex]);
   frmLesson.show;
   frmDash.Hide;
 
@@ -203,10 +206,38 @@ begin
 end;
 
 procedure TfrmDash.imgShopClick(Sender: TObject);
+Var
+i : integer;
+
 begin
 
   frmShop.show;
   frmDash.Hide;
+
+    // Adds Check Boxes to Array for shop
+
+  sChkBoxes[1] := frmShop.chkJPNum;
+  sChkBoxes[2] := frmShop.chkJPDays;
+  sChkBoxes[3] := frmShop.chkJPMonths;
+  sChkBoxes[4] := frmShop.chkJPNouns;
+  sChkBoxes[5] := frmShop.chkAfriNum;
+  sChkBoxes[6] := frmShop.chkAfriDays;
+  sChkBoxes[7] := frmShop.chkAfriMonths;
+  sChkBoxes[8] := frmShop.chkAfriNouns;
+
+  // Hides Purchased items
+  for i := 1 to 8 do
+  begin
+    if frmlogIn.sCourses[i] = '0' then
+    begin
+      sChkBoxes[i].Visible := True;
+    end
+    else
+    begin
+      sChkBoxes[i].Checked := False;
+      sChkBoxes[i].Visible := False;
+    end;
+  end; // End Purchase IF
 
 end;
 
