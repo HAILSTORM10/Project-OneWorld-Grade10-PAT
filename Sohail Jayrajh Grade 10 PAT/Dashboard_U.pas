@@ -67,6 +67,7 @@ VAr
   iPoints: integer;
 begin
 
+  frmDash.Hide;
   frmAdmin.show;
 
   // Preps rgpUsers
@@ -207,14 +208,14 @@ end;
 
 procedure TfrmDash.imgShopClick(Sender: TObject);
 Var
-i : integer;
+  i: integer;
 
 begin
 
   frmShop.show;
   frmDash.Hide;
 
-    // Adds Check Boxes to Array for shop
+  // Adds Check Boxes to Array for shop
 
   sChkBoxes[1] := frmShop.chkJPNum;
   sChkBoxes[2] := frmShop.chkJPDays;

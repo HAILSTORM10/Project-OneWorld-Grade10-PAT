@@ -11109,11 +11109,10 @@ object frmHelp: TfrmHelp
     Top = 152
     Width = 761
     Height = 361
-    ActivePage = TabSheet2
+    ActivePage = General
     TabOrder = 1
     object General: TTabSheet
       Caption = 'General'
-      ExplicitWidth = 757
       object redGeneral: TRichEdit
         Left = -4
         Top = 0
@@ -11150,6 +11149,10 @@ object frmHelp: TfrmHelp
     object Welcome: TTabSheet
       Caption = 'Welcome'
       ImageIndex = 1
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object redWelcome: TRichEdit
         Left = -4
         Top = 0
@@ -11172,6 +11175,10 @@ object frmHelp: TfrmHelp
     object LogIn: TTabSheet
       Caption = 'LogIn'
       ImageIndex = 2
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object redLogin: TRichEdit
         Left = -4
         Top = 0
@@ -11200,6 +11207,10 @@ object frmHelp: TfrmHelp
     object TabSheet1: TTabSheet
       Caption = 'Dashboard'
       ImageIndex = 3
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object redDash: TRichEdit
         Left = -4
         Top = 0
@@ -11234,6 +11245,10 @@ object frmHelp: TfrmHelp
     object Lessons: TTabSheet
       Caption = 'Lessons'
       ImageIndex = 4
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object redLesson: TRichEdit
         Left = -4
         Top = -7
@@ -11269,6 +11284,10 @@ object frmHelp: TfrmHelp
     object Shop: TTabSheet
       Caption = 'Shop'
       ImageIndex = 5
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
       object redShop: TRichEdit
         Left = -4
         Top = -7

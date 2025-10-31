@@ -20,9 +20,14 @@ type
     chkJPNum: TCheckBox;
     chkAfriNum: TCheckBox;
     lblPrice: TLabel;
+    Image1: TImage;
+    btnClose: TButton;
+    imgHelp: TImage;
     procedure btnBuyDaysClick(Sender: TObject);
     procedure imgReturnClick(Sender: TObject);
     procedure bntBuyClick(Sender: TObject);
+    procedure btnCloseClick(Sender: TObject);
+    procedure imgHelpClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,7 +41,7 @@ var
 
 implementation
 
-uses LogIn_U, Dashboard_U;
+uses LogIn_U, Dashboard_U, Help_U;
 {$R *.dfm}
 
 procedure TfrmShop.bntBuyClick(Sender: TObject);
@@ -206,6 +211,17 @@ begin
   // else
   // Showmessage('You already own this!');
 
+end;
+
+procedure TfrmShop.btnCloseClick(Sender: TObject);
+begin
+Application.Terminate;
+end;
+
+procedure TfrmShop.imgHelpClick(Sender: TObject);
+begin
+frmShop.Hide;
+frmHelp.show;
 end;
 
 procedure TfrmShop.imgReturnClick(Sender: TObject);

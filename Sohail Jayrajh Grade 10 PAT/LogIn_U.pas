@@ -36,7 +36,6 @@ type
 
 var
   frmLogIn: TfrmLogIn;
-  i: Integer;
   bExists: Boolean;
   sAvailableCourses: Array [1 .. 8] of TButton;
 
@@ -52,7 +51,7 @@ end;
 
 procedure TfrmLogIn.btnCreateClick(Sender: TObject);
 VAR
-  iSpecial: Integer;
+  iSpecial, i: Integer;
   bAllowed: Boolean;
 begin
 
@@ -135,6 +134,8 @@ begin
 end;
 
 procedure TfrmLogIn.btnLoginClick(Sender: TObject);
+VAR
+i: Integer;
 begin
 
   if NOT FILEEXISTS('Userinfo.txt') then
@@ -146,7 +147,7 @@ begin
     AssignFile(tUsin, 'Userinfo.txt'); // Clossed in Shop_U  No it isn't
     Reset(tUsin);
 
-    repeat
+    repeat // Try to find User
       ReadLN(tUsin, sUser);
       ReadLN(tUsin, sPass);
       ReadLN(tUsin, iPoints);
@@ -160,6 +161,7 @@ begin
       ShowMessage('You got it, boss!');
       frmLogIn.Hide;
       frmDash.show;
+      frmDash.lblHeader.Caption := 'Good to See you Again, Boss!';
       frmDash.btnadmin.visible := True;
       iPoints := 100000;
       sCourses := '11111111';
@@ -171,6 +173,9 @@ begin
       ShowMessage('Succsess!');
       frmLogIn.Hide;
       frmDash.show;
+      frmDash.lblHeader.Caption := ('Good to See you Again, ' + sUser + '!');
+      frmDash.lblPoints.Caption := ('Points: ' + IntToStr(iPoints));
+
 
       // Checks what courses should be available to this user
 
@@ -198,7 +203,7 @@ begin
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.text) then
     begin
-      ShowMessage('Username Does Not Exist!');
+      ShowMessage('User Does Not Exist!');
     end
     else
     begin
@@ -206,8 +211,6 @@ begin
     end; // END EVERYTHING
 
     CloseFile(tUsin);
-    frmDash.lblHeader.caption := ('Good to See you Again, ' + sUser + ' !');
-    frmDash.lblPoints.caption := ('Points: ' + IntToStr(iPoints));
   end;
 end;
 

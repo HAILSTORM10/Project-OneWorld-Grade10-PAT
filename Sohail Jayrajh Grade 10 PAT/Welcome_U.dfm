@@ -19,7 +19,7 @@ object frmWelcome: TfrmWelcome
     Left = 0
     Top = 0
     Width = 1281
-    Height = 729
+    Height = 737
     Center = True
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000005000000

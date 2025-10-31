@@ -19,6 +19,7 @@ type
     lblFeedback: TLabel;
     lblNewPoints: TLabel;
     redOut: TRichEdit;
+    imgBack: TImage;
     procedure imgReturnClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnCheckClick(Sender: TObject);
@@ -170,7 +171,7 @@ begin
   redOut.Visible := True;
   Reset(frmDash.tLesson);
 
-  while Not EOF(frmDash.tLesson) do
+  while Not EOF(frmDash.tLesson) do    // Display Question and Answe
   begin
     ReadLN(frmDash.tLesson, sQuestion);
     ReadLN(frmDash.tLesson, sAnswer);
@@ -182,20 +183,20 @@ end;
 procedure TfrmLesson.btnStartClick(Sender: TObject);
 begin
 
-  btnStart.Visible := False;
+  btnStart.Visible := False;         // Hides uneeded components
   btnLearn.Visible := False;
   redOut.Visible := False;
   btnCheck.Visible := True;
   lblFeedback.Visible := True;
   lblNewPoints.Visible := True;
 
-  Reset(frmDash.tLesson);
+  Reset(frmDash.tLesson);                                       // Sets up First Question
   ReadLN(frmDash.tLesson, sQuestion);
   ReadLN(frmDash.tLesson, sAnswer);
   lblQues.Caption := sQuestion;
   iNewPoints := 0;
 
-  frmLesson.btnCheck.Show;
+  frmLesson.btnCheck.Show;             // Shows Needed components
   frmLesson.edtAns.Show;
   frmLesson.lblQues.Show;
 end;
