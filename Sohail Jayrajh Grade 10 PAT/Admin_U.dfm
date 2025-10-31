@@ -51284,16 +51284,16 @@ object frmAdmin: TfrmAdmin
     OnClick = imgHelpClick
   end
   object lblCustom: TLabel
-    Left = 178
+    Left = 168
     Top = 183
-    Width = 267
-    Height = 29
+    Width = 275
+    Height = 30
     Caption = 'Create a Custom Course!'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -24
-    Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Name = 'Ink Free'
+    Font.Style = [fsBold]
     ParentFont = False
   end
   object btnUsers: TButton
@@ -51314,6 +51314,12 @@ object frmAdmin: TfrmAdmin
     Width = 185
     Height = 105
     Caption = 'Select a User To View Their Details'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
   end
   object btnCustom: TButton
@@ -51330,7 +51336,7 @@ object frmAdmin: TfrmAdmin
     Top = 112
     Width = 210
     Height = 121
-    Font.Charset = SHIFTJIS_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
@@ -51362,7 +51368,7 @@ object frmAdmin: TfrmAdmin
     MaxValue = 100
     MinValue = 1
     TabOrder = 5
-    Value = 0
+    Value = 1
   end
   object edtCustom: TEdit
     Left = 168

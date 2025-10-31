@@ -1,0 +1,3 @@
+"Good Programming Techniques" - Review Code
+"Formatted, e.g Currency" - Add Rating
+"Local and Global variables" - Check Globals

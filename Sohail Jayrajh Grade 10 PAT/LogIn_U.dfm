@@ -15,7 +15,7 @@ object frmLogIn: TfrmLogIn
   PixelsPerInch = 96
   TextHeight = 13
   object lblUser: TLabel
-    Left = 408
+    Left = 464
     Top = 200
     Width = 93
     Height = 26
@@ -28,7 +28,7 @@ object frmLogIn: TfrmLogIn
     ParentFont = False
   end
   object lblPass: TLabel
-    Left = 408
+    Left = 464
     Top = 280
     Width = 88
     Height = 26
@@ -41,7 +41,7 @@ object frmLogIn: TfrmLogIn
     ParentFont = False
   end
   object lblLogin: TLabel
-    Left = 396
+    Left = 452
     Top = 96
     Width = 405
     Height = 53
@@ -43014,7 +43014,7 @@ object frmLogIn: TfrmLogIn
     Stretch = True
   end
   object btnLogin: TButton
-    Left = 585
+    Left = 641
     Top = 416
     Width = 75
     Height = 25
@@ -43026,7 +43026,7 @@ object frmLogIn: TfrmLogIn
     OnClick = btnLoginClick
   end
   object edtUser: TEdit
-    Left = 536
+    Left = 592
     Top = 197
     Width = 217
     Height = 33
@@ -43040,7 +43040,7 @@ object frmLogIn: TfrmLogIn
     TextHint = 'Enter Your Username'
   end
   object edtPass: TEdit
-    Left = 536
+    Left = 592
     Top = 277
     Width = 217
     Height = 33
@@ -43063,7 +43063,7 @@ object frmLogIn: TfrmLogIn
     OnClick = btnCloseClick
   end
   object btnCreate: TButton
-    Left = 576
+    Left = 632
     Top = 447
     Width = 97
     Height = 25

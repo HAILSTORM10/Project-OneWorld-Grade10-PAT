@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses Dashboard_U, Help_U, Welcome_U;
+uses Dashboard_U, Help_U, Welcome_U, Admin_U;
 {$R *.dfm}
 
 procedure TfrmLogIn.btnCloseClick(Sender: TObject);
@@ -135,7 +135,7 @@ end;
 
 procedure TfrmLogIn.btnLoginClick(Sender: TObject);
 VAR
-i: Integer;
+  i: Integer;
 begin
 
   if NOT FILEEXISTS('Userinfo.txt') then
@@ -143,9 +143,18 @@ begin
     ShowMessage('Please Create a User');
   end
   else
-  begin
+  begin // File Exists, check for user
     AssignFile(tUsin, 'Userinfo.txt'); // Clossed in Shop_U  No it isn't
     Reset(tUsin);
+
+    sAvailableCourses[1] := frmDash.btnJapNum;
+    sAvailableCourses[2] := frmDash.btnJapDays;
+    sAvailableCourses[3] := frmDash.btnJapMonths;
+    sAvailableCourses[4] := frmDash.btnJapNouns;
+    sAvailableCourses[5] := frmDash.btnAfriNum;
+    sAvailableCourses[6] := frmDash.btnAfriDays;
+    sAvailableCourses[7] := frmDash.btnAfriMonths;
+    sAvailableCourses[8] := frmDash.btnAfriNouns;
 
     repeat // Try to find User
       ReadLN(tUsin, sUser);
@@ -158,6 +167,7 @@ begin
 
     if (edtUser.text = 'Admin') AND (edtPass.text = 'Admin@123') then
     begin
+
       ShowMessage('You got it, boss!');
       frmLogIn.Hide;
       frmDash.show;
@@ -165,6 +175,25 @@ begin
       frmDash.btnadmin.visible := True;
       iPoints := 100000;
       sCourses := '11111111';
+
+
+      // Preps rgpUsers in FrmAdmin
+
+      AssignFile(frmLogIn.tUsin, 'UserInfo.txt');
+      Reset(frmLogIn.tUsin);
+      frmAdmin.rgpUsers.Items.Clear;
+
+      while NOT EOF(frmLogIn.tUsin) do
+      begin
+
+        ReadLN(frmLogIn.tUsin, sUser);
+        ReadLN(frmLogIn.tUsin, sPass);
+        ReadLN(frmLogIn.tUsin, iPoints);
+        ReadLN(frmLogIn.tUsin, sCourses);
+
+        frmAdmin.rgpUsers.Items.add(sUser); // Puts Users in radio group
+
+      end;
 
     end
     else if (sUser = edtUser.text) And (sPass = edtPass.text) then
@@ -179,27 +208,6 @@ begin
 
       // Checks what courses should be available to this user
 
-      sAvailableCourses[1] := frmDash.btnJapNum;
-      sAvailableCourses[2] := frmDash.btnJapDays;
-      sAvailableCourses[3] := frmDash.btnJapMonths;
-      sAvailableCourses[4] := frmDash.btnJapNouns;
-      sAvailableCourses[5] := frmDash.btnAfriNum;
-      sAvailableCourses[6] := frmDash.btnAfriDays;
-      sAvailableCourses[7] := frmDash.btnAfriMonths;
-      sAvailableCourses[8] := frmDash.btnAfriNouns;
-
-      for i := 1 to 8 do
-      begin
-        if sCourses[i] = '1' then
-        begin
-          sAvailableCourses[i].visible := True;
-        end
-        else
-        begin
-          sAvailableCourses[i].visible := False;
-        end;
-      end; // End Course Check
-
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.text) then
     begin
@@ -211,7 +219,20 @@ begin
     end; // END EVERYTHING
 
     CloseFile(tUsin);
-  end;
+  end; // END File Exists, chck for user
+
+  for i := 1 to 8 do
+  begin
+    if sCourses[i] = '1' then
+    begin
+      sAvailableCourses[i].visible := True;
+    end
+    else
+    begin
+      sAvailableCourses[i].visible := False;
+    end;
+  end; // End Course Check
+
 end;
 
 procedure TfrmLogIn.FormCreate(Sender: TObject);

@@ -26,6 +26,8 @@ type
     redLesson: TRichEdit;
     redShop: TRichEdit;
     redAdmin: TRichEdit;
+    TabSheet3: TTabSheet;
+    redReviews: TRichEdit;
     procedure btnCloseClick(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
   private

@@ -29,6 +29,7 @@ type
     lblCustom: TLabel;
     cmbCustom: TComboBox;
     btnCustom: TButton;
+    imgRate: TImage;
     procedure btnCloseClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
@@ -45,6 +46,7 @@ type
     procedure imgShopClick(Sender: TObject);
     procedure btnCustomClick(Sender: TObject);
     procedure btnAdminClick(Sender: TObject);
+    procedure imgRateClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -69,25 +71,6 @@ begin
 
   frmDash.Hide;
   frmAdmin.show;
-
-  // Preps rgpUsers
-
-  AssignFile(frmlogIn.tUsIN, 'UserInfo.txt');
-  Reset(frmlogIn.tUsIN);
-
-  while NOT EOF(frmlogIn.tUsIN) do
-  begin
-
-    ReadLN(frmlogIn.tUsIN, sUser);
-    ReadLN(frmlogIn.tUsIN, sPass);
-    ReadLN(frmlogIn.tUsIN, iPoints);
-    ReadLN(frmlogIn.tUsIN, sCourses);
-
-    frmAdmin.rgpUsers.items.add(sUser); // Puts Users in radio group
-
-  end;
-
-  CloseFile(frmlogIn.tUsIN);
 
 end;
 
@@ -200,10 +183,51 @@ begin
   frmHelp.show;
 end;
 
+procedure TfrmDash.imgRateClick(Sender: TObject);
+VAr
+  sReview, sRating: String;
+  rRating: Real;
+  i: integer;
+  cAllowed: Char;
+begin
+
+  sReview := InputBox('Give us a Review!', 'How do you feel about the app?',
+    ' ');
+
+  if sReview = '' then
+  begin
+    ShowMessage('Please Write something!');
+    exit;
+  end;
+
+  sRating := InputBox('Give us a Review!', 'Rate the app out of 100', ' ');
+  for i := 1 to Length(sRating) do
+
+    if sRating[i] IN ['0' .. '9'] then
+    begin
+      cAllowed := 'Y';
+    end
+    else
+      cAllowed := 'N';
+
+  if (cAllowed = 'Y') AND NOT(StrToFloat(sRating) > 100) then
+  begin
+    rRating := StrToFloat(sRating);
+  end
+  else
+    ShowMessage('Enter only numbers less than 100');
+
+  frmHelp.redReviews.Lines.Add('"' + sReview + ' "' + FloatToStrF(rRating,
+      FFFixed, 8, 1) + '/100 - ' + frmlogIn.sUser);
+
+end;
+
 procedure TfrmDash.imgReturnClick(Sender: TObject);
 begin
   frmDash.Hide;
   frmlogIn.show;
+  btnAdmin.Visible := False;
+
 end;
 
 procedure TfrmDash.imgShopClick(Sender: TObject);

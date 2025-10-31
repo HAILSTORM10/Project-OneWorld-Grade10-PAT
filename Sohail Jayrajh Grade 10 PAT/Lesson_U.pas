@@ -228,9 +228,11 @@ begin
   frmLesson.Hide;
   frmDash.Show;
 
+
   btnStart.Visible := True;
   btnLearn.Visible := True;
   btnCheck.Visible := False;
+  redOut.Visible := False;
   frmLesson.btnCheck.Hide;
   frmLesson.edtAns.Hide;
   frmLesson.lblQues.Hide;

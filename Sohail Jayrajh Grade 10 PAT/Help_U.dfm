@@ -11118,7 +11118,7 @@ object frmHelp: TfrmHelp
         Top = 0
         Width = 761
         Height = 337
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11149,16 +11149,12 @@ object frmHelp: TfrmHelp
     object Welcome: TTabSheet
       Caption = 'Welcome'
       ImageIndex = 1
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object redWelcome: TRichEdit
         Left = -4
         Top = 0
         Width = 761
         Height = 344
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11175,16 +11171,12 @@ object frmHelp: TfrmHelp
     object LogIn: TTabSheet
       Caption = 'LogIn'
       ImageIndex = 2
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object redLogin: TRichEdit
         Left = -4
         Top = 0
         Width = 761
         Height = 337
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11207,16 +11199,12 @@ object frmHelp: TfrmHelp
     object TabSheet1: TTabSheet
       Caption = 'Dashboard'
       ImageIndex = 3
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object redDash: TRichEdit
         Left = -4
         Top = 0
         Width = 761
         Height = 344
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11245,16 +11233,12 @@ object frmHelp: TfrmHelp
     object Lessons: TTabSheet
       Caption = 'Lessons'
       ImageIndex = 4
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object redLesson: TRichEdit
         Left = -4
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11284,16 +11268,12 @@ object frmHelp: TfrmHelp
     object Shop: TTabSheet
       Caption = 'Shop'
       ImageIndex = 5
-      ExplicitLeft = 0
-      ExplicitTop = 0
-      ExplicitWidth = 0
-      ExplicitHeight = 0
       object redShop: TRichEdit
         Left = -4
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11322,7 +11302,7 @@ object frmHelp: TfrmHelp
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = SHIFTJIS_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11344,6 +11324,24 @@ object frmHelp: TfrmHelp
           
             ' You can view the information of users using the tools on your r' +
             'ight.')
+        ParentFont = False
+        ReadOnly = True
+        TabOrder = 0
+      end
+    end
+    object TabSheet3: TTabSheet
+      Caption = 'Reviews'
+      ImageIndex = 7
+      object redReviews: TRichEdit
+        Left = -8
+        Top = -11
+        Width = 761
+        Height = 344
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Tahoma'
+        Font.Style = []
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
