@@ -32,11 +32,11 @@ type
     iPoints: Integer;
     tUsin: TextFile;
     sUser, sPass, sCourses: String;
+    bLoggedIN: Boolean;
   end;
 
 var
   frmLogIn: TfrmLogIn;
-  bExists: Boolean;
   sAvailableCourses: Array [1 .. 8] of TButton;
 
 implementation
@@ -175,7 +175,7 @@ begin
       frmDash.btnadmin.visible := True;
       iPoints := 100000;
       sCourses := '11111111';
-
+      bLoggedIN := True;
 
       // Preps rgpUsers in FrmAdmin
 
@@ -195,6 +195,8 @@ begin
 
       end;
 
+      sUser := 'Admin';
+
     end
     else if (sUser = edtUser.text) And (sPass = edtPass.text) then
     // Normal user Check
@@ -204,7 +206,7 @@ begin
       frmDash.show;
       frmDash.lblHeader.Caption := ('Good to See you Again, ' + sUser + '!');
       frmDash.lblPoints.Caption := ('Points: ' + IntToStr(iPoints));
-
+      bLoggedIN := True;
 
       // Checks what courses should be available to this user
 
@@ -237,13 +239,36 @@ end;
 
 procedure TfrmLogIn.FormCreate(Sender: TObject);
 begin
-  imgBack.SendToBack;
+  bLoggedIN := False;
 end;
 
 procedure TfrmLogIn.imgHelpClick(Sender: TObject);
+Var
+  tReviews: TextFile;
+  sReviews: String;
 begin
   frmLogIn.Hide;
   frmHelp.show;
+
+  frmHelp.redReviews.Lines.Clear; // Load Reviews
+
+  if FILEEXISTS('Reviews.txt') then
+  begin
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+
+    while NOT EOF(tReviews) do
+    begin
+      ReadLN(tReviews, sReviews);
+      frmHelp.redReviews.Lines.add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end
+  else
+    frmHelp.redReviews.Lines.add(
+      'Be the first to leave a review using your dashboard!');
+
 end;
 
 procedure TfrmLogIn.imgReturnClick(Sender: TObject);

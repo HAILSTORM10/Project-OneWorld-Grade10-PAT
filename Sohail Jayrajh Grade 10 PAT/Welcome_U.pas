@@ -34,20 +34,35 @@ uses LogIn_U, Help_U, Lesson_U, Dashboard_U;
 
 procedure TfrmWelcome.btnGoClick(Sender: TObject);
 Var
-  tSetUp: TextFile;
-  sLine, path: String;
+  tSetUp, tReviews: TextFile;
+  sLine, path, sReviews: String;
 begin
   frmWelcome.Hide;
   frmLogIN.Show;
 
   for path in TDirectory.GetFiles('Custom\') do
+  // List custom courses on Dashboard
   begin
     frmdash.cmbCustom.Items.Add(Copy(path, 8, POS('.txt', path) - 4))
   end;
 
+  // Load Reviews
 
+  if FileExists('Reviews.txt') then
+  begin
 
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+    frmHelp.redReviews.Lines.clear;
 
+    while NOT EOF(tReviews) do
+    begin
+      ReadLn(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end;
 
 end;
 
@@ -62,9 +77,32 @@ begin
 end;
 
 procedure TfrmWelcome.imgHelpClick(Sender: TObject);
+Var
+  tReviews: TextFile;
+  sReviews: String;
 begin
   frmWelcome.Hide;
   frmHelp.Show;
+
+
+
+  // Load Reviews
+
+  if FileExists('Reviews.txt') then
+  begin
+
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+    frmHelp.redReviews.Lines.clear;
+    while NOT EOF(tReviews) do
+    begin
+      ReadLn(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end;
+
 end;
 
 end.

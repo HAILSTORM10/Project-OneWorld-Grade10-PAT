@@ -1,7 +1,7 @@
 object frmDash: TfrmDash
   Left = 0
   Top = 0
-  Caption = 'Dashboard'
+  Caption = 'Dashboard - Your path to everything, all in one place'
   ClientHeight = 720
   ClientWidth = 1280
   Color = clBtnFace
@@ -16206,7 +16206,7 @@ object frmDash: TfrmDash
     Font.Name = 'Ink Free'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 8
+    ExplicitLeft = 432
     ExplicitTop = 1
   end
   object imgHelp: TImage
@@ -36537,7 +36537,7 @@ object frmDash: TfrmDash
     OnClick = imgReturnClick
   end
   object lblPoints: TLabel
-    Left = 104
+    Left = 120
     Top = 678
     Width = 84
     Height = 34
@@ -36577,9 +36577,9 @@ object frmDash: TfrmDash
   end
   object imgShop: TImage
     Left = 8
-    Top = 644
-    Width = 65
-    Height = 68
+    Top = 600
+    Width = 106
+    Height = 112
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D49484452000001680000
       016808060000007AE561D5000000097048597300000B1300000B1301009A9C18
@@ -38337,16 +38337,16 @@ object frmDash: TfrmDash
     OnClick = imgRateClick
   end
   object btnClose: TButton
-    Left = 1197
+    Left = 1163
     Top = 8
-    Width = 75
+    Width = 105
     Height = 25
     Caption = 'Close The App'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 0
     OnClick = btnCloseClick

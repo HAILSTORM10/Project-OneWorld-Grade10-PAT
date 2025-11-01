@@ -23,7 +23,6 @@ type
     Image1: TImage;
     btnClose: TButton;
     imgHelp: TImage;
-    procedure btnBuyDaysClick(Sender: TObject);
     procedure imgReturnClick(Sender: TObject);
     procedure bntBuyClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
@@ -36,8 +35,7 @@ type
 
 var
   frmShop: TfrmShop;
-//  test: integer;
-  sChkBoxes: array [1 .. 8] of TCheckBox;
+   sChkBoxes: array [1 .. 8] of TCheckBox; // Global to be used in frmDash
 
 implementation
 
@@ -48,7 +46,6 @@ procedure TfrmShop.bntBuyClick(Sender: TObject);
 VAR
   sUser, sPass, sCourses: String;
   i, iPoints: integer;
-
 begin
 
 
@@ -139,79 +136,6 @@ begin
 
 end;
 
-procedure TfrmShop.btnBuyDaysClick(Sender: TObject);
-Var
-  sUser, sPass: String;
-begin
-
-  // redUserInfo.Clear;
-  // sUser := frmlogin.sUser;
-  // sPass := frmlogin.sPass;
-  //
-  // if frmlogin.sCourses[2] = '0' then
-  // begin
-  //
-  // frmlogin.iPoints := frmlogin.iPoints - 200;
-  //
-  // frmlogin.sCourses[2] := '1';
-  //
-  // AssignFile(frmlogin.tUsin, 'Userinfo.txt');
-  // Reset(frmlogin.tUsin);
-  // redUserInfo.PlainText := True;
-  //
-  // redUserInfo.Lines.Add(frmlogin.sUser);
-  // redUserInfo.Lines.Add(frmlogin.sPass);
-  // redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
-  // redUserInfo.Lines.Add(frmlogin.sCourses);
-  //
-  // Reset(frmlogin.tUsin);
-  //
-  // Repeat
-  // ReadLN(frmlogin.tUsin, sUser);
-  // ReadLN(frmlogin.tUsin, sPass);
-  // ReadLN(frmlogin.tUsin, frmlogin.iPoints);
-  // ReadLN(frmlogin.tUsin, frmlogin.sCourses);
-  //
-  // if (sUser = frmlogin.sUser) AND (sPass = frmlogin.sPass) then
-  // begin
-  // redUserInfo.PlainText := True;
-  // end
-  // else
-  // begin
-  // redUserInfo.Lines.Add(sUser);
-  // redUserInfo.Lines.Add(sPass);
-  // redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
-  // redUserInfo.Lines.Add(frmlogin.sCourses);
-  // end;
-  // Until EOF(frmlogin.tUsin);
-  //
-  // // while NOT(sUser = frmlogin.sUser) AND NOT(sPass = frmlogin.sPass) do
-  // // begin
-  // //
-  // // end; // END While check
-  //
-  // // Repeat
-  // // begin
-  // //
-  // // ReadLN(frmlogin.tUsin, sUser);
-  // // ReadLN(frmlogin.tUsin, sPass);
-  // // ReadLN(frmlogin.tUsin, frmlogin.iPoints);
-  // // ReadLN(frmlogin.tUsin, frmlogin.sCourses);
-  // //
-  // // redUserInfo.Lines.Add(sUser);
-  // // redUserInfo.Lines.Add(sPass);
-  // // redUserInfo.Lines.Add(IntTOStr(frmlogin.iPoints));
-  // // redUserInfo.Lines.Add(frmlogin.sCourses);
-  // // end;
-  // // Until EOF(frmlogin.tUsin); // END  Repeat
-  //
-  // CloseFIle(frmlogin.tUsin);
-  // redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
-  // end
-  // else
-  // Showmessage('You already own this!');
-
-end;
 
 procedure TfrmShop.btnCloseClick(Sender: TObject);
 begin
@@ -219,9 +143,31 @@ Application.Terminate;
 end;
 
 procedure TfrmShop.imgHelpClick(Sender: TObject);
+Var
+  tReviews: Textfile;
+  sReviews: String;
 begin
 frmShop.Hide;
 frmHelp.show;
+
+  frmHelp.redReviews.Lines.clear;   // Load Reviews
+
+  if FileExists('Reviews.txt') then
+  begin
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+
+    while NOT EOF(tReviews) do
+    begin
+      ReadLn(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end
+  else
+  frmHelp.redReviews.Lines.Add('Be the first to leave a review using your dashboard!');
+
 end;
 
 procedure TfrmShop.imgReturnClick(Sender: TObject);

@@ -1,7 +1,7 @@
 object frmWelcome: TfrmWelcome
   Left = 0
   Top = 0
-  Caption = 'Welcome'
+  Caption = 'Welcome to Project: OneWorld'
   ClientHeight = 732
   ClientWidth = 1276
   Color = clBtnFace
@@ -22651,27 +22651,27 @@ object frmWelcome: TfrmWelcome
   object lblWelcome: TLabel
     Left = 344
     Top = 192
-    Width = 551
+    Width = 572
     Height = 68
     Caption = 'Okaeri|Welcome|Welkom'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -55
     Font.Name = 'Ink Free'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
   end
   object lblSubWelcome: TLabel
-    Left = 368
+    Left = 361
     Top = 266
-    Width = 513
-    Height = 31
+    Width = 548
+    Height = 30
     Caption = 'suteki sekai e!|to a new world!|na '#39'n nuwe wereld!'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
-    Font.Height = -25
+    Font.Height = -24
     Font.Name = 'Ink Free'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
   end
   object imgHelp: TImage

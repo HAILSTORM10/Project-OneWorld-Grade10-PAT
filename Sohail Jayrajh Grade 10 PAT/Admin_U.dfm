@@ -1,7 +1,7 @@
 object frmAdmin: TfrmAdmin
   Left = 0
   Top = 0
-  Caption = 'Admin'
+  Caption = 'Admin - UNLIMITED POWER!!!!'
   ClientHeight = 681
   ClientWidth = 1264
   Color = clBtnFace
@@ -15,9 +15,9 @@ object frmAdmin: TfrmAdmin
   TextHeight = 13
   object imgTest: TImage
     Tag = 1
-    Left = 8
+    Left = 0
     Top = 0
-    Width = 1265
+    Width = 1273
     Height = 681
     Picture.Data = {
       0954506E67496D61676589504E470D0A1A0A0000000D494844520000044A0000
@@ -51297,12 +51297,12 @@ object frmAdmin: TfrmAdmin
     ParentFont = False
   end
   object btnUsers: TButton
-    Left = 1023
-    Top = 128
+    Left = 1055
+    Top = 136
     Width = 129
     Height = 25
     Hint = 'Display the selected Users information'
-    Caption = 'Fetch Me Their Souls!'
+    Caption = 'Fetch User info!'
     ParentShowHint = False
     ShowHint = True
     TabOrder = 0
@@ -51311,14 +51311,14 @@ object frmAdmin: TfrmAdmin
   object rgpUsers: TRadioGroup
     Left = 832
     Top = 128
-    Width = 185
-    Height = 105
+    Width = 217
+    Height = 121
     Caption = 'Select a User To View Their Details'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 1
   end
@@ -51333,10 +51333,10 @@ object frmAdmin: TfrmAdmin
   end
   object redOut: TRichEdit
     Left = 616
-    Top = 112
+    Top = 128
     Width = 210
     Height = 121
-    Font.Charset = ANSI_CHARSET
+    Font.Charset = SHIFTJIS_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
@@ -51345,16 +51345,16 @@ object frmAdmin: TfrmAdmin
     TabOrder = 3
   end
   object btnClose: TButton
-    Left = 1181
+    Left = 1151
     Top = 8
-    Width = 75
+    Width = 105
     Height = 25
     Caption = 'Close The App'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -11
     Font.Name = 'Tahoma'
-    Font.Style = []
+    Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 4
     OnClick = btnCloseClick

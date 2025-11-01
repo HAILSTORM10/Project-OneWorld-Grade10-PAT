@@ -1,7 +1,7 @@
 object frmHelp: TfrmHelp
   Left = 0
   Top = 0
-  Caption = 'Help'
+  Caption = 'Help - Your map to the new world'
   ClientHeight = 719
   ClientWidth = 1280
   Color = clBtnFace
@@ -11096,11 +11096,17 @@ object frmHelp: TfrmHelp
     OnClick = imgHelpClick
   end
   object btnClose: TButton
-    Left = 1197
+    Left = 1163
     Top = 8
-    Width = 75
+    Width = 105
     Height = 25
     Caption = 'Close The App'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 0
     OnClick = btnCloseClick
   end
@@ -11118,7 +11124,7 @@ object frmHelp: TfrmHelp
         Top = 0
         Width = 761
         Height = 337
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11154,7 +11160,7 @@ object frmHelp: TfrmHelp
         Top = 0
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11176,7 +11182,7 @@ object frmHelp: TfrmHelp
         Top = 0
         Width = 761
         Height = 337
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11204,7 +11210,7 @@ object frmHelp: TfrmHelp
         Top = 0
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11238,7 +11244,7 @@ object frmHelp: TfrmHelp
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11273,7 +11279,7 @@ object frmHelp: TfrmHelp
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11302,7 +11308,7 @@ object frmHelp: TfrmHelp
         Top = -7
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
@@ -11333,16 +11339,19 @@ object frmHelp: TfrmHelp
       Caption = 'Reviews'
       ImageIndex = 7
       object redReviews: TRichEdit
-        Left = -8
-        Top = -11
+        Left = -4
+        Top = -8
         Width = 761
         Height = 344
-        Font.Charset = ANSI_CHARSET
+        Font.Charset = SHIFTJIS_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Tahoma'
         Font.Style = []
+        Lines.Strings = (
+          'Be the first to leave a review using your dashboard!')
         ParentFont = False
+        PlainText = True
         ReadOnly = True
         TabOrder = 0
       end

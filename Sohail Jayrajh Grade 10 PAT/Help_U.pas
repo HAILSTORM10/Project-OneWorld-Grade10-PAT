@@ -41,19 +41,27 @@ var
 
 implementation
 
-uses LogIn_U;
-
+uses LogIn_U, Dashboard_U;
 {$R *.dfm}
 
 procedure TfrmHelp.btnCloseClick(Sender: TObject);
 begin
-Application.Terminate
+  Application.Terminate
 end;
 
 procedure TfrmHelp.imgHelpClick(Sender: TObject);
 begin
-frmHelp.Hide;
-frmlogin.show;
+  frmHelp.Hide;
+
+  // Decides where to return user based on whether they are logged in or not
+
+  if frmlogin.bLoggedIN = false then
+  begin
+    frmlogin.show;
+  end
+  else
+    frmDAsh.show;
+
 end;
 
 end.

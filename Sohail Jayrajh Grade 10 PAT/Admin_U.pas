@@ -50,7 +50,9 @@ VAR
   iNum, i: Integer;
 begin
 
-  if edtCustom.Text = '' then    // Check if Name is Suitable
+sName := edtCustom.Text;
+
+  if sName = '' then    // Check if Name is Suitable
   begin
     ShowMessage('Please name your course using the provided edit box');
     exit;
@@ -62,7 +64,6 @@ begin
   end
   else           // If it is suitable, move on
   begin
-    sName := edtCustom.Text;
     iNum := spnCustom.Value;
   end;
 
@@ -130,10 +131,32 @@ end;
 end;
 
 procedure TfrmAdmin.imgHelpClick(Sender: TObject);
+Var
+  tReviews: Textfile;
+  sReviews: String;
 begin
   frmAdmin.Hide;
-  frmhelp.show;
-end;
+ frmhelp.show;
+
+   frmHelp.redReviews.Lines.clear;   // Load Reviews
+
+  if FileExists('Reviews.txt') then
+  begin
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+
+    while NOT EOF(tReviews) do
+    begin
+      ReadLn(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end
+  else
+  frmHelp.redReviews.Lines.Add('Be the first to leave a review using your dashboard!');
+
+ end;
 
 procedure TfrmAdmin.imgReturnClick(Sender: TObject);
 begin

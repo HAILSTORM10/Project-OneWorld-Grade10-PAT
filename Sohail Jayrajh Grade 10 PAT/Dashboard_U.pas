@@ -52,7 +52,7 @@ type
   public
     { Public declarations }
     tLesson: Textfile; // File Closed in Lesson_U
-    // sActiveCourse : string;
+
   end;
 
 var
@@ -178,9 +178,31 @@ begin
 end;
 
 procedure TfrmDash.imgHelpClick(Sender: TObject);
+Var
+  tReviews: Textfile;
+  sReviews: String;
 begin
   frmDash.Hide;
   frmHelp.show;
+
+  frmHelp.redReviews.Lines.clear;   // Load Reviews
+
+  if FileExists('Reviews.txt') then
+  begin
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+
+    while NOT EOF(tReviews) do
+    begin
+      ReadLn(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end
+  else
+  frmHelp.redReviews.Lines.Add('Be the first to leave a review using your dashboard!');
+
 end;
 
 procedure TfrmDash.imgRateClick(Sender: TObject);
@@ -189,10 +211,11 @@ VAr
   rRating: Real;
   i: integer;
   cAllowed: Char;
+  tReviews: Textfile;
 begin
-
+  // Prompt User to enter a few words
   sReview := InputBox('Give us a Review!', 'How do you feel about the app?',
-    ' ');
+    '');
 
   if sReview = '' then
   begin
@@ -201,6 +224,8 @@ begin
   end;
 
   sRating := InputBox('Give us a Review!', 'Rate the app out of 100', ' ');
+  // Ask for rating between 0 - 100
+
   for i := 1 to Length(sRating) do
 
     if sRating[i] IN ['0' .. '9'] then
@@ -211,22 +236,42 @@ begin
       cAllowed := 'N';
 
   if (cAllowed = 'Y') AND NOT(StrToFloat(sRating) > 100) then
+  // Did they enter a valid number
   begin
     rRating := StrToFloat(sRating);
+    rRating := rRating / 10;
   end
   else
+  begin
     ShowMessage('Enter only numbers less than 100');
+    exit;
+  end;
+  // Add Rating to RichEdit in The Help form
 
-  frmHelp.redReviews.Lines.Add('"' + sReview + ' "' + FloatToStrF(rRating,
-      FFFixed, 8, 1) + '/100 - ' + frmlogIn.sUser);
+
+  if Not FIleExists('Reviews.txt') then
+     begin
+       frmHelp.redReviews.Lines.clear;
+     end;
+
+  frmHelp.redReviews.Lines.Add('"' + sReview + '" ' + FloatToStrF(rRating,
+      FFFixed, 8, 1) + '/10 - ' + frmlogIn.sUser);
+
+  frmHelp.redReviews.Lines.SaveToFile('Reviews.txt'); // Saves to reviews file
+  //
+  // AssignFile(tReviews, 'Reviews.txt');      // updates review
+  // Reset(tReviews);
 
 end;
 
 procedure TfrmDash.imgReturnClick(Sender: TObject);
+
 begin
   frmDash.Hide;
   frmlogIn.show;
   btnAdmin.Visible := False;
+
+  frmLogin.bLoggedIN := False; // Logs out user
 
 end;
 

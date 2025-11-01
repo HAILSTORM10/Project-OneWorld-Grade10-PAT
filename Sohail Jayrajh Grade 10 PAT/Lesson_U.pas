@@ -38,8 +38,8 @@ type
 var
   frmLesson: TfrmLesson;
   // tJPNum: TextFile;
-  iNewPoints, iNum: Integer;
-  sQuestion, sAnswer, sTest: String;
+  iNewPoints: Integer;
+  sQuestion, sAnswer: String;
   sCorrectMotivation: Array [1 .. 6] of String = (
     'Good Job!',
     'You got it!',
@@ -65,7 +65,7 @@ uses LogIn_U, Dashboard_U, Shop_U, Help_U;
 procedure TfrmLesson.btnCheckClick(Sender: TObject);
 Var
   sUser, sPass, sCourses: String;
-  iPoints: Integer;
+  iPoints, iFeedback: Integer;
   tFeedback: TextFile;
 begin
 
@@ -75,18 +75,18 @@ begin
   if Not EOF(frmDash.tLesson) then
   begin
 
-    iNum := Random(6) + 1;
+    iFeedback := Random(6) + 1;
 
     if UPPERCASE(edtAns.text) = sAnswer then // Check If answer is Correct
     begin
-      lblFeedback.Caption := sCorrectMotivation[iNum];
+      lblFeedback.Caption := sCorrectMotivation[iFeedback];
       INC(iNewPoints, 10); // Award Points
       lblNewPoints.Caption := 'Points: + ' + IntTOStr(iNewPoints);
     end
     // END IF Correct
     else // If incorrect
     begin
-      lblFeedback.Caption := sIncorrectMotivation[iNum];
+      lblFeedback.Caption := sIncorrectMotivation[iFeedback];
     end;
     // END Answer Check
 
@@ -103,17 +103,19 @@ begin
     ShowMessage('Course Complete!, you earned ' + IntTOStr(iNewPoints)
         + ' new points!');
 
-    frmLesson.Hide;
+    frmLesson.Hide; // Clean-up Scene for next time
     frmDash.Show;
 
     btnStart.Visible := True;
     btnLearn.Visible := True;
     btnCheck.Visible := False;
-    frmLesson.btnCheck.Hide;
-    frmLesson.edtAns.Hide;
-    frmLesson.lblQues.Hide;
+    btnCheck.Hide;
+    edtAns.Hide;
+    edtAns.text := '';
+    lblQues.Hide;
     frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
     frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
+
     CloseFile(frmDash.tLesson);
 
 
@@ -171,7 +173,7 @@ begin
   redOut.Visible := True;
   Reset(frmDash.tLesson);
 
-  while Not EOF(frmDash.tLesson) do    // Display Question and Answe
+  while Not EOF(frmDash.tLesson) do // Display Question and Answe
   begin
     ReadLN(frmDash.tLesson, sQuestion);
     ReadLN(frmDash.tLesson, sAnswer);
@@ -183,25 +185,29 @@ end;
 procedure TfrmLesson.btnStartClick(Sender: TObject);
 begin
 
-  btnStart.Visible := False;         // Hides uneeded components
+  btnStart.Visible := False; // Hides uneeded components
   btnLearn.Visible := False;
   redOut.Visible := False;
   btnCheck.Visible := True;
   lblFeedback.Visible := True;
   lblNewPoints.Visible := True;
 
-  Reset(frmDash.tLesson);                                       // Sets up First Question
+  Reset(frmDash.tLesson); // Sets up First Question
   ReadLN(frmDash.tLesson, sQuestion);
   ReadLN(frmDash.tLesson, sAnswer);
   lblQues.Caption := sQuestion;
   iNewPoints := 0;
 
-  frmLesson.btnCheck.Show;             // Shows Needed components
+  frmLesson.btnCheck.Show; // Shows Needed components
   frmLesson.edtAns.Show;
   frmLesson.lblQues.Show;
+
 end;
 
 procedure TfrmLesson.imgHelpClick(Sender: TObject);
+Var
+  tReviews: TextFile;
+  sReviews: String;
 begin
 
   frmLesson.Hide;
@@ -211,12 +217,34 @@ begin
   btnStart.Visible := True;
   btnLearn.Visible := True;
   btnCheck.Visible := False;
-  frmLesson.btnCheck.Hide;
-  frmLesson.edtAns.Hide;
-  frmLesson.lblQues.Hide;
+  btnCheck.Hide;
+  edtAns.Hide;
+  edtAns.text := '';
+  lblQues.Hide;
   frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
   frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
+
+  Reset(frmDash.tLesson); // Closes File without Error
   CloseFile(frmDash.tLesson);
+
+  frmHelp.redReviews.Lines.Clear; // Load Reviews
+
+  if FileExists('Reviews.txt') then
+  begin
+    AssignFile(tReviews, 'Reviews.txt');
+    Reset(tReviews);
+
+    while NOT EOF(tReviews) do
+    begin
+      ReadLN(tReviews, sReviews);
+      frmHelp.redReviews.Lines.Add(sReviews);
+    end;
+
+    CloseFile(tReviews);
+  end
+  else
+    frmHelp.redReviews.Lines.Add(
+      'Be the first to leave a review using your dashboard!');
 
 end;
 
@@ -228,16 +256,19 @@ begin
   frmLesson.Hide;
   frmDash.Show;
 
-
   btnStart.Visible := True;
   btnLearn.Visible := True;
   btnCheck.Visible := False;
   redOut.Visible := False;
-  frmLesson.btnCheck.Hide;
-  frmLesson.edtAns.Hide;
-  frmLesson.lblQues.Hide;
+
+  btnCheck.Hide;
+  edtAns.Hide;
+  edtAns.text := '';
+  lblQues.Hide;
   frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
   frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
+
+  Reset(frmDash.tLesson); // Closes File Without Error
   CloseFile(frmDash.tLesson);
 
 end;
