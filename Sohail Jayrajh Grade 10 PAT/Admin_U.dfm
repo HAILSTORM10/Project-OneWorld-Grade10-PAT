@@ -3,7 +3,7 @@ object frmAdmin: TfrmAdmin
   Top = 0
   Caption = 'Admin - UNLIMITED POWER!!!!'
   ClientHeight = 681
-  ClientWidth = 1264
+  ClientWidth = 1265
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -51296,6 +51296,32 @@ object frmAdmin: TfrmAdmin
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lblDeleteCourse: TLabel
+    Left = 592
+    Top = 384
+    Width = 273
+    Height = 30
+    Caption = 'Select a course to delete'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Ink Free'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 616
+    Top = 92
+    Width = 280
+    Height = 30
+    Caption = 'View a user'#39's information'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Ink Free'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object btnUsers: TButton
     Left = 1055
     Top = 136
@@ -51378,5 +51404,22 @@ object frmAdmin: TfrmAdmin
     Hint = 'Enter the name of the course you want to create'
     TabOrder = 6
     TextHint = 'Enter New Courses Name'
+  end
+  object lbxDeleteCourse: TListBox
+    Left = 616
+    Top = 425
+    Width = 210
+    Height = 185
+    ItemHeight = 13
+    TabOrder = 7
+  end
+  object btnDeleteCourse: TButton
+    Left = 616
+    Top = 616
+    Width = 210
+    Height = 25
+    Caption = 'Delete the Selected Course'
+    TabOrder = 8
+    OnClick = btnDeleteCourseClick
   end
 end

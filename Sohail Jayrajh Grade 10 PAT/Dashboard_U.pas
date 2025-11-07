@@ -52,7 +52,7 @@ type
   public
     { Public declarations }
     tLesson: Textfile; // File Closed in Lesson_U
-
+    bCustom: Boolean;
   end;
 
 var
@@ -68,6 +68,24 @@ VAr
   sUser, sPass, sCourses: String;
   iPoints: integer;
 begin
+
+  // Preps rgpUsers in FrmAdmin
+
+  AssignFile(frmLogIn.tUsin, 'UserInfo.txt');
+  Reset(frmLogIn.tUsin);
+  frmAdmin.rgpUsers.Items.Clear;
+
+  while NOT EOF(frmLogIn.tUsin) do
+  begin
+
+    ReadLN(frmLogIn.tUsin, sUser);
+    ReadLN(frmLogIn.tUsin, sPass);
+    ReadLN(frmLogIn.tUsin, iPoints);
+    ReadLN(frmLogIn.tUsin, sCourses);
+
+    frmAdmin.rgpUsers.Items.add(sUser); // Puts Users in radio group
+
+  end;
 
   frmDash.Hide;
   frmAdmin.show;
@@ -115,15 +133,36 @@ begin
 end;
 
 procedure TfrmDash.btnCustomClick(Sender: TObject);
-VAR
-  sCustomLesson: String;
 begin
 
   // Loads file For a custom lesson
 
-  AssignFile(tLesson, 'Custom\' + cmbCustom.items[cmbCustom.ItemIndex]);
-  frmLesson.show;
-  frmDash.Hide;
+  if cmbCustom.ItemIndex <> -1 then
+  begin
+
+    if FileExists('Custom\' + cmbCustom.Items[cmbCustom.ItemIndex]) then
+    // Does the course exist?
+    begin
+
+      AssignFile(tLesson, 'Custom\' + cmbCustom.Items[cmbCustom.ItemIndex]);
+      // Load if yes
+      frmLesson.show;
+      frmDash.Hide;
+
+    end
+    else
+    begin
+      ShowMessage('The file could not be found, removing from list');
+      // Delete if no.
+      cmbCustom.Items.Delete(cmbCustom.ItemIndex);
+      frmAdmin.lbxDeleteCourse.Items.Delete(cmbCustom.ItemIndex);
+    end;
+
+  end
+  else
+    ShowMessage('Please select a course');
+
+  bCustom := True;
 
 end;
 
@@ -168,13 +207,13 @@ end;
 
 procedure TfrmDash.Button1Click(Sender: TObject);
 begin
-  ShowMessage(frmlogIn.sUser);
+  ShowMessage(frmLogIn.sUser);
 end;
 
 procedure TfrmDash.FormCreate(Sender: TObject);
 begin
   imgBack.SendToBack;
-  lblHeader.Caption := ('Good to See you Again, ' + frmlogIn.sUser + ' !');
+  lblHeader.Caption := ('Good to See you Again, ' + frmLogIn.sUser + ' !');
 end;
 
 procedure TfrmDash.imgHelpClick(Sender: TObject);
@@ -185,7 +224,7 @@ begin
   frmDash.Hide;
   frmHelp.show;
 
-  frmHelp.redReviews.Lines.clear;   // Load Reviews
+  frmHelp.redReviews.Lines.Clear; // Load Reviews
 
   if FileExists('Reviews.txt') then
   begin
@@ -194,14 +233,15 @@ begin
 
     while NOT EOF(tReviews) do
     begin
-      ReadLn(tReviews, sReviews);
-      frmHelp.redReviews.Lines.Add(sReviews);
+      ReadLN(tReviews, sReviews);
+      frmHelp.redReviews.Lines.add(sReviews);
     end;
 
     CloseFile(tReviews);
   end
   else
-  frmHelp.redReviews.Lines.Add('Be the first to leave a review using your dashboard!');
+    frmHelp.redReviews.Lines.add(
+      'Be the first to leave a review using your dashboard!');
 
 end;
 
@@ -248,14 +288,13 @@ begin
   end;
   // Add Rating to RichEdit in The Help form
 
+  if Not FileExists('Reviews.txt') then
+  begin
+    frmHelp.redReviews.Lines.Clear;
+  end;
 
-  if Not FIleExists('Reviews.txt') then
-     begin
-       frmHelp.redReviews.Lines.clear;
-     end;
-
-  frmHelp.redReviews.Lines.Add('"' + sReview + '" ' + FloatToStrF(rRating,
-      FFFixed, 8, 1) + '/10 - ' + frmlogIn.sUser);
+  frmHelp.redReviews.Lines.add('"' + sReview + '" ' + FloatToStrF(rRating,
+      FFFixed, 8, 1) + '/10 - ' + frmLogIn.sUser);
 
   frmHelp.redReviews.Lines.SaveToFile('Reviews.txt'); // Saves to reviews file
   //
@@ -268,10 +307,10 @@ procedure TfrmDash.imgReturnClick(Sender: TObject);
 
 begin
   frmDash.Hide;
-  frmlogIn.show;
+  frmLogIn.show;
   btnAdmin.Visible := False;
 
-  frmLogin.bLoggedIN := False; // Logs out user
+  frmLogIn.bLoggedIN := False; // Logs out user
 
 end;
 
@@ -298,7 +337,7 @@ begin
   // Hides Purchased items
   for i := 1 to 8 do
   begin
-    if frmlogIn.sCourses[i] = '0' then
+    if frmLogIn.sCourses[i] = '0' then
     begin
       sChkBoxes[i].Visible := True;
     end

@@ -16206,8 +16206,8 @@ object frmDash: TfrmDash
     Font.Name = 'Ink Free'
     Font.Style = []
     ParentFont = False
-    ExplicitLeft = 432
-    ExplicitTop = 1
+    ExplicitWidth = 459
+    ExplicitHeight = 60
   end
   object imgHelp: TImage
     Left = 8

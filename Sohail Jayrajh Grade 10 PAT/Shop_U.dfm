@@ -19645,7 +19645,7 @@ object frmShop: TfrmShop
     OnClick = imgReturnClick
   end
   object lblPrice: TLabel
-    Left = 553
+    Left = 593
     Top = 112
     Width = 159
     Height = 23
@@ -30093,7 +30093,7 @@ object frmShop: TfrmShop
     Visible = False
   end
   object chkJPDays: TCheckBox
-    Left = 432
+    Left = 472
     Top = 223
     Width = 169
     Height = 17
@@ -30107,7 +30107,7 @@ object frmShop: TfrmShop
     TabOrder = 1
   end
   object chkJPMonths: TCheckBox
-    Left = 432
+    Left = 472
     Top = 287
     Width = 169
     Height = 17
@@ -30121,7 +30121,7 @@ object frmShop: TfrmShop
     TabOrder = 2
   end
   object chkJPNouns: TCheckBox
-    Left = 432
+    Left = 472
     Top = 344
     Width = 169
     Height = 17
@@ -30135,7 +30135,7 @@ object frmShop: TfrmShop
     TabOrder = 3
   end
   object chkAfriNouns: TCheckBox
-    Left = 660
+    Left = 700
     Top = 344
     Width = 173
     Height = 17
@@ -30149,7 +30149,7 @@ object frmShop: TfrmShop
     TabOrder = 4
   end
   object chkAfriMonths: TCheckBox
-    Left = 660
+    Left = 700
     Top = 287
     Width = 173
     Height = 17
@@ -30163,7 +30163,7 @@ object frmShop: TfrmShop
     TabOrder = 5
   end
   object chkAfriDays: TCheckBox
-    Left = 660
+    Left = 700
     Top = 223
     Width = 173
     Height = 17
@@ -30177,8 +30177,8 @@ object frmShop: TfrmShop
     TabOrder = 6
   end
   object bntBuy: TButton
-    Left = 577
-    Top = 528
+    Left = 625
+    Top = 440
     Width = 75
     Height = 25
     Caption = 'BUY!'
@@ -30186,7 +30186,7 @@ object frmShop: TfrmShop
     OnClick = bntBuyClick
   end
   object chkJPNum: TCheckBox
-    Left = 432
+    Left = 472
     Top = 179
     Width = 169
     Height = 17
@@ -30201,7 +30201,7 @@ object frmShop: TfrmShop
     Visible = False
   end
   object chkAfriNum: TCheckBox
-    Left = 660
+    Left = 700
     Top = 179
     Width = 169
     Height = 17

@@ -20,6 +20,7 @@ type
     lblNewPoints: TLabel;
     redOut: TRichEdit;
     imgBack: TImage;
+    lblInstruction: TLabel;
     procedure imgReturnClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure btnCheckClick(Sender: TObject);
@@ -66,7 +67,6 @@ procedure TfrmLesson.btnCheckClick(Sender: TObject);
 Var
   sUser, sPass, sCourses: String;
   iPoints, iFeedback: Integer;
-  tFeedback: TextFile;
 begin
 
 
@@ -110,9 +110,16 @@ begin
     btnLearn.Visible := True;
     btnCheck.Visible := False;
     btnCheck.Hide;
+
     edtAns.Hide;
     edtAns.text := '';
+
+    lblNewPoints.Hide;
+    lblFeedback.Hide;
     lblQues.Hide;
+    lblInstruction.Hide;
+
+    frmDash.bCustom := False;
     frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
     frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
 
@@ -122,41 +129,45 @@ begin
 
     // Save New Point Information
 
-    AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
-    Reset(frmLogIn.tUsin);
-    frmShop.redUserInfo.PlainText := True;
+    if frmLogIn.sUser <> 'Admin' then      // If the user is not an Admin
+    begin
 
-    frmShop.redUserInfo.Lines.Add(frmLogIn.sUser); // Add information to redOut to export to file
-    frmShop.redUserInfo.Lines.Add(frmLogIn.sPass);
-    frmShop.redUserInfo.Lines.Add(IntTOStr(frmLogIn.iPoints));
-    frmShop.redUserInfo.Lines.Add(frmLogIn.sCourses);
+      AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
+      Reset(frmLogIn.tUsin);
+      frmShop.redUserInfo.PlainText := True;
 
-    Reset(frmLogIn.tUsin);
+      frmShop.redUserInfo.Lines.Add(frmLogIn.sUser);
+      // Add information to redOut to export to file
+      frmShop.redUserInfo.Lines.Add(frmLogIn.sPass);
+      frmShop.redUserInfo.Lines.Add(IntTOStr(frmLogIn.iPoints));
+      frmShop.redUserInfo.Lines.Add(frmLogIn.sCourses);
 
-    Repeat // Preserve other data in file
+      Reset(frmLogIn.tUsin);
 
-      ReadLN(frmLogIn.tUsin, sUser);
-      ReadLN(frmLogIn.tUsin, sPass);
-      ReadLN(frmLogIn.tUsin, iPoints);
-      ReadLN(frmLogIn.tUsin, sCourses);
+      Repeat // Preserve other data in file
 
-      if NOT(sUser = frmLogIn.sUser) AND NOT(sPass = frmLogIn.sPass) then
-      // begin
-      // frmShop.redUserInfo.PlainText := True;
-      // end
-      // else
-      begin
-        frmShop.redUserInfo.Lines.Add(sUser);
-        frmShop.redUserInfo.Lines.Add(sPass);
-        frmShop.redUserInfo.Lines.Add(IntTOStr(iPoints));
-        frmShop.redUserInfo.Lines.Add(sCourses);
-      end;
+        ReadLN(frmLogIn.tUsin, sUser);
+        ReadLN(frmLogIn.tUsin, sPass);
+        ReadLN(frmLogIn.tUsin, iPoints);
+        ReadLN(frmLogIn.tUsin, sCourses);
 
-    Until EOF(frmLogIn.tUsin);
+        if NOT(sUser = frmLogIn.sUser) AND NOT(sPass = frmLogIn.sPass) then
+        // begin
+        // frmShop.redUserInfo.PlainText := True;
+        // end
+        // else
+        begin
+          frmShop.redUserInfo.Lines.Add(sUser);
+          frmShop.redUserInfo.Lines.Add(sPass);
+          frmShop.redUserInfo.Lines.Add(IntTOStr(iPoints));
+          frmShop.redUserInfo.Lines.Add(sCourses);
+        end;
 
-    CloseFile(frmLogIn.tUsin);
-    frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
+      Until EOF(frmLogIn.tUsin);
 
+      CloseFile(frmLogIn.tUsin);
+      frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
+    end;
   end;
 
 end;
@@ -191,6 +202,11 @@ begin
   btnCheck.Visible := True;
   lblFeedback.Visible := True;
   lblNewPoints.Visible := True;
+
+  if frmDash.bCustom = False then // If the course isn't custom, display instruction
+  begin
+    lblInstruction.Visible := True;
+  end;
 
   Reset(frmDash.tLesson); // Sets up First Question
   ReadLN(frmDash.tLesson, sQuestion);
@@ -265,6 +281,8 @@ begin
   edtAns.Hide;
   edtAns.text := '';
   lblQues.Hide;
+  lblInstruction.Hide;
+  frmDash.bCustom := False;
   frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
   frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
 

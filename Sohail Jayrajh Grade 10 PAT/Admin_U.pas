@@ -19,11 +19,16 @@ type
     edtCustom: TEdit;
     lblCustom: TLabel;
     imgTest: TImage;
+    lbxDeleteCourse: TListBox;
+    btnDeleteCourse: TButton;
+    lblDeleteCourse: TLabel;
+    Label1: TLabel;
     procedure btnUsersClick(Sender: TObject);
     procedure btnCustomClick(Sender: TObject);
     procedure btnCloseClick(Sender: TObject);
     procedure imgReturnClick(Sender: TObject);
     procedure imgHelpClick(Sender: TObject);
+    procedure btnDeleteCourseClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -45,14 +50,14 @@ end;
 
 procedure TfrmAdmin.btnCustomClick(Sender: TObject);
 VAR
-  sName, sQues, sAns, sNum, path, sline: String;
-  tNewCourse, tCMBSelection: Textfile;
-  iNum, i: Integer;
+  sName, sQues, sAns: String;
+  tNewCourse: Textfile;
+  iNumQuestions, i: Integer;
 begin
 
-sName := edtCustom.Text;
+  sName := edtCustom.Text;
 
-  if sName = '' then    // Check if Name is Suitable
+  if sName = '' then // Check if Name is Suitable
   begin
     ShowMessage('Please name your course using the provided edit box');
     exit;
@@ -62,26 +67,30 @@ sName := edtCustom.Text;
     ShowMessage('A course with that name already exists!');
     exit;
   end
-  else           // If it is suitable, move on
+  else // If it is suitable, move on
   begin
-    iNum := spnCustom.Value;
+    iNumQuestions := spnCustom.Value;
   end;
 
   AssignFIle(tNewCourse, 'Custom\' + sName + '.txt');
   // Create file and prep for writing
   Rewrite(tNewCourse);
 
-  for i := 1 to iNum do
+  for i := 1 to iNumQuestions do
   begin
 
     repeat // Get Question and Ensure it's not blank
       sQues := InputBox('Create New Course', 'What is the Question?', '');
+      if sQues = '' then
+        showMessage('Please enter something');
     until Not(sQues = '');
 
     WriteLN(tNewCourse, sQues);
 
     repeat // Get Question and Ensure it's not blank
       sAns := InputBox('Create New Course', 'What is the Answer?', '');
+      if sQues = '' then
+        showMessage('Please enter something');
     until Not(sAns = '');
 
     WriteLN(tNewCourse, UpperCase(sAns))
@@ -91,33 +100,66 @@ sName := edtCustom.Text;
   CloseFile(tNewCourse);
 
   frmdash.cmbCustom.Items.Add(sName + '.txt');
+  lbxDeleteCourse.Items.Add(sName + '.txt');
+
+end;
+
+procedure TfrmAdmin.btnDeleteCourseClick(Sender: TObject);
+VAR
+  sConfirm: String;
+begin
+
+  if lbxDeleteCourse.ItemIndex = -1 then // Ensure a course is selected
+  begin
+    ShowMessage('Select a course above');
+  end
+  else
+  begin
+
+    sConfirm := InputBox('You are about to delete a course!',
+      // Get confirmation from user
+      'Once a course is deleted, it cannot be restored!' + #13 + #13 + ' Delete it? Yes/No',
+      'No');
+
+    if UpperCase(sConfirm) = 'YES' then // If Confirmed, move on
+    begin
+
+      frmdash.cmbCustom.Items.Delete(lbxDeleteCourse.ItemIndex);
+      DeleteFile('Custom\' + lbxDeleteCourse.Items[lbxDeleteCourse.ItemIndex]);
+      lbxDeleteCourse.Items.Delete(lbxDeleteCourse.ItemIndex);
+      ShowMessage('Successfully deleted course!');
+
+    end
+    else // Don't delete course
+      ShowMessage('Understood, the course will not be deleted');
+
+  end;
 
 end;
 
 procedure TfrmAdmin.btnUsersClick(Sender: TObject);
 Var
-  tFile: Textfile;
   sUser, sPass, sCourses: String;
   iPoints: Integer;
 begin
 
-if rgpUsers.ItemIndex = -1 then       // Ensure that a user is selected
-begin
-  ShowMessage('No User selected');
-  exit;
-end;
+  if rgpUsers.ItemIndex = -1 then // Ensure that a user is selected
+  begin
+    ShowMessage('No User selected');
+    exit;
+  end;
 
   AssignFIle(frmlogIn.tUsIN, 'UserInfo.txt');
   Reset(frmlogIn.tUsIN);
 
   repeat
-    ReadLN(frmlogIn.tUsIN, sUser);           // Read information until User is matched
+    ReadLN(frmlogIn.tUsIN, sUser); // Read information until User is matched
     ReadLN(frmlogIn.tUsIN, sPass);
     ReadLN(frmlogIn.tUsIN, iPoints);
     ReadLN(frmlogIn.tUsIN, sCourses);
-  until sUser = rgpUsers.Items[rgpUsers.itemindex];
+  until sUser = rgpUsers.Items[rgpUsers.ItemIndex];
 
-  with redOut do                       // Display Users information
+  with redOut do // Display Users information
   begin
     Lines.Clear;
     Lines.Add('Username: ' + #9 + sUser);
@@ -136,27 +178,28 @@ Var
   sReviews: String;
 begin
   frmAdmin.Hide;
- frmhelp.show;
+  frmhelp.show;
 
-   frmHelp.redReviews.Lines.clear;   // Load Reviews
+  frmhelp.redReviews.Lines.Clear; // Load Reviews
 
   if FileExists('Reviews.txt') then
   begin
-    AssignFile(tReviews, 'Reviews.txt');
+    AssignFIle(tReviews, 'Reviews.txt');
     Reset(tReviews);
 
     while NOT EOF(tReviews) do
     begin
-      ReadLn(tReviews, sReviews);
-      frmHelp.redReviews.Lines.Add(sReviews);
+      ReadLN(tReviews, sReviews);
+      frmhelp.redReviews.Lines.Add(sReviews);
     end;
 
     CloseFile(tReviews);
   end
   else
-  frmHelp.redReviews.Lines.Add('Be the first to leave a review using your dashboard!');
+    frmhelp.redReviews.Lines.Add(
+      'Be the first to leave a review using your dashboard!');
 
- end;
+end;
 
 procedure TfrmAdmin.imgReturnClick(Sender: TObject);
 begin

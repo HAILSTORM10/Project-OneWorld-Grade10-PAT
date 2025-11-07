@@ -29,21 +29,21 @@ var
 
 implementation
 
-uses LogIn_U, Help_U, Lesson_U, Dashboard_U;
+uses LogIn_U, Help_U, Lesson_U, Dashboard_U, Admin_U;
 {$R *.dfm}
 
 procedure TfrmWelcome.btnGoClick(Sender: TObject);
 Var
-  tSetUp, tReviews: TextFile;
-  sLine, path, sReviews: String;
+ tReviews: TextFile;
+ sCourses, sReviews: String;
 begin
   frmWelcome.Hide;
   frmLogIN.Show;
 
-  for path in TDirectory.GetFiles('Custom\') do
-  // List custom courses on Dashboard
+  for sCourses in TDirectory.GetFiles('Custom\') do // List custom courses on Dashboard and Admin Page
   begin
-    frmdash.cmbCustom.Items.Add(Copy(path, 8, POS('.txt', path) - 4))
+    frmdash.cmbCustom.Items.Add(Copy(sCourses, 8, POS('.txt', sCourses) - 4));
+    frmAdmin.lbxDeleteCourse.Items.Add(Copy(sCourses, 8, POS('.txt', sCourses) - 4));
   end;
 
   // Load Reviews

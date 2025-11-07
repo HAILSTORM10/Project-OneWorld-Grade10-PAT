@@ -59,10 +59,17 @@ begin
 
     sUser := InputBox('Create a User', 'What is your name?', '');
 
+    if sUser = '' then
+    begin
+      ShowMessage('User creation cancelled');
+      exit;
+    end;
+
     for i := 1 to Length(sUser) do
     begin
 
       if NOT(sUser[i] IN ['A' .. 'Z', 'a' .. 'z', ' ']) then
+      // No special characters
       begin // Yes
         ShowMessage('Username cannot contain special characters!');
         bAllowed := False;
@@ -79,7 +86,6 @@ begin
   iSpecial := 0;
 
   repeat
-  begin
 
     sPass := InputBox('Create a User', 'What is your password?', '');
 
@@ -109,7 +115,6 @@ begin
 
     end; // End Whole Password IF
 
-  end;
   until iSpecial > 0; // END Pass While
 
   AssignFile(tUsin, 'Userinfo.txt'); // Start Saving User Details
@@ -176,25 +181,6 @@ begin
       iPoints := 100000;
       sCourses := '11111111';
       bLoggedIN := True;
-
-      // Preps rgpUsers in FrmAdmin
-
-      AssignFile(frmLogIn.tUsin, 'UserInfo.txt');
-      Reset(frmLogIn.tUsin);
-      frmAdmin.rgpUsers.Items.Clear;
-
-      while NOT EOF(frmLogIn.tUsin) do
-      begin
-
-        ReadLN(frmLogIn.tUsin, sUser);
-        ReadLN(frmLogIn.tUsin, sPass);
-        ReadLN(frmLogIn.tUsin, iPoints);
-        ReadLN(frmLogIn.tUsin, sCourses);
-
-        frmAdmin.rgpUsers.Items.add(sUser); // Puts Users in radio group
-
-      end;
-
       sUser := 'Admin';
 
     end
@@ -208,7 +194,10 @@ begin
       frmDash.lblPoints.Caption := ('Points: ' + IntToStr(iPoints));
       bLoggedIN := True;
 
-      // Checks what courses should be available to this user
+      // Empty Fields for next login
+
+      edtUser.clear;
+      edtPass.clear;
 
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.text) then
@@ -220,8 +209,10 @@ begin
       ShowMessage('Password is Incorrect!');
     end; // END EVERYTHING
 
-    CloseFile(tUsin);
+
   end; // END File Exists, chck for user
+
+  // Checks what courses should be available to this user
 
   for i := 1 to 8 do
   begin
@@ -234,6 +225,8 @@ begin
       sAvailableCourses[i].visible := False;
     end;
   end; // End Course Check
+
+   CloseFile(tUsin);
 
 end;
 
@@ -250,7 +243,7 @@ begin
   frmLogIn.Hide;
   frmHelp.show;
 
-  frmHelp.redReviews.Lines.Clear; // Load Reviews
+  frmHelp.redReviews.Lines.clear; // Load Reviews
 
   if FILEEXISTS('Reviews.txt') then
   begin
