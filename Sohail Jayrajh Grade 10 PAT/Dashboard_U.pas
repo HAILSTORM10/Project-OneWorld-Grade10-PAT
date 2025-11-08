@@ -66,7 +66,7 @@ uses Help_U, LogIn_U, Lesson_U, Shop_U, Admin_U;
 procedure TfrmDash.btnAdminClick(Sender: TObject);
 VAr
   sUser, sPass, sCourses: String;
-  iPoints: integer;
+  iPoints, iNumUsers: integer;
 begin
 
   // Preps rgpUsers in FrmAdmin
@@ -74,6 +74,7 @@ begin
   AssignFile(frmLogIn.tUsin, 'UserInfo.txt');
   Reset(frmLogIn.tUsin);
   frmAdmin.rgpUsers.Items.Clear;
+  iNumUsers := 0;
 
   while NOT EOF(frmLogIn.tUsin) do
   begin
@@ -84,9 +85,12 @@ begin
     ReadLN(frmLogIn.tUsin, sCourses);
 
     frmAdmin.rgpUsers.Items.add(sUser); // Puts Users in radio group
+    inc(iNumUsers);
 
   end;
 
+
+  frmAdmin.rgpUsers.Height := 50 * iNumUsers;
   frmDash.Hide;
   frmAdmin.show;
 

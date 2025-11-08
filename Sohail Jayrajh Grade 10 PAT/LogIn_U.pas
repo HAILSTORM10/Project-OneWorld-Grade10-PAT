@@ -194,23 +194,28 @@ begin
       frmDash.lblPoints.Caption := ('Points: ' + IntToStr(iPoints));
       bLoggedIN := True;
 
-      // Empty Fields for next login
 
-      edtUser.clear;
-      edtPass.clear;
 
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.text) then
     begin
       ShowMessage('User Does Not Exist!');
+    exit;
     end
     else
     begin
       ShowMessage('Password is Incorrect!');
+    exit;
     end; // END EVERYTHING
 
 
   end; // END File Exists, chck for user
+
+
+    // Empty Fields for next login
+
+      edtUser.clear;
+      edtPass.clear;
 
   // Checks what courses should be available to this user
 

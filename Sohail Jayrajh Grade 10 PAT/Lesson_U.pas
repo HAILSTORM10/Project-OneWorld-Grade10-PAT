@@ -70,6 +70,12 @@ Var
 begin
 
 
+if edtAns.Text = '' then
+begin
+  ShowMessage('Enter an Answer Above!');
+  Exit;
+end;
+
   // Check if there are more questions
 
   if Not EOF(frmDash.tLesson) then

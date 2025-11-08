@@ -51338,7 +51338,7 @@ object frmAdmin: TfrmAdmin
     Left = 832
     Top = 128
     Width = 217
-    Height = 121
+    Height = 100
     Caption = 'Select a User To View Their Details'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
