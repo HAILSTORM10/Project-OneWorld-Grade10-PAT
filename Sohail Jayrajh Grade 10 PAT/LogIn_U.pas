@@ -166,7 +166,10 @@ begin
       ReadLN(tUsin, sPass);
       ReadLN(tUsin, iPoints);
       ReadLN(tUsin, sCourses);
-    until (EOF(tUsin)) OR (sUser = edtUser.text) AND (sPass = edtPass.text);
+    until (EOF(tUsin)) OR (sUser = edtUser.text);
+
+    CloseFile(tUsin);
+
 
     // Admin Check
 
@@ -194,28 +197,25 @@ begin
       frmDash.lblPoints.Caption := ('Points: ' + IntToStr(iPoints));
       bLoggedIN := True;
 
-
-
     end // END EXIST CHECK IF
     else if Not(sUser = edtUser.text) then
     begin
       ShowMessage('User Does Not Exist!');
-    exit;
+      exit;
     end
-    else
+    else if NOT(sPass = edtPass.text) then
     begin
       ShowMessage('Password is Incorrect!');
-    exit;
+      exit;
     end; // END EVERYTHING
-
 
   end; // END File Exists, chck for user
 
 
-    // Empty Fields for next login
+  // Empty Fields for next login
 
-      edtUser.clear;
-      edtPass.clear;
+  edtUser.clear;
+  edtPass.clear;
 
   // Checks what courses should be available to this user
 
@@ -230,8 +230,6 @@ begin
       sAvailableCourses[i].visible := False;
     end;
   end; // End Course Check
-
-   CloseFile(tUsin);
 
 end;
 

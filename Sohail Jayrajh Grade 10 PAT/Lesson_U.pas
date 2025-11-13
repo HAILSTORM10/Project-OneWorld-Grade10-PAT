@@ -69,12 +69,11 @@ Var
   iPoints, iFeedback: Integer;
 begin
 
-
-if edtAns.Text = '' then
-begin
-  ShowMessage('Enter an Answer Above!');
-  Exit;
-end;
+  if edtAns.Text = '' then
+  begin
+    ShowMessage('Enter an Answer Above!');
+    Exit;
+  end;
 
   // Check if there are more questions
 
@@ -83,7 +82,7 @@ end;
 
     iFeedback := Random(6) + 1;
 
-    if UPPERCASE(edtAns.text) = sAnswer then // Check If answer is Correct
+    if UPPERCASE(edtAns.Text) = sAnswer then // Check If answer is Correct
     begin
       lblFeedback.Caption := sCorrectMotivation[iFeedback];
       INC(iNewPoints, 10); // Award Points
@@ -109,16 +108,17 @@ end;
     ShowMessage('Course Complete!, you earned ' + IntTOStr(iNewPoints)
         + ' new points!');
 
-    frmLesson.Hide; // Clean-up Scene for next time
+    frmLesson.Hide;
     frmDash.Show;
 
+    // Clean-up Scene for next time
     btnStart.Visible := True;
     btnLearn.Visible := True;
     btnCheck.Visible := False;
     btnCheck.Hide;
 
     edtAns.Hide;
-    edtAns.text := '';
+    edtAns.Text := '';
 
     lblNewPoints.Hide;
     lblFeedback.Hide;
@@ -135,11 +135,13 @@ end;
 
     // Save New Point Information
 
-    if frmLogIn.sUser <> 'Admin' then      // If the user is not an Admin
+    if frmLogIn.sUser <> 'Admin' then // If the user is not an Admin
     begin
 
+      ShowMessage('Assigning file...');
       AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
       Reset(frmLogIn.tUsin);
+      ShowMessage('file Assigned!');
       frmShop.redUserInfo.PlainText := True;
 
       frmShop.redUserInfo.Lines.Add(frmLogIn.sUser);
@@ -158,10 +160,6 @@ end;
         ReadLN(frmLogIn.tUsin, sCourses);
 
         if NOT(sUser = frmLogIn.sUser) AND NOT(sPass = frmLogIn.sPass) then
-        // begin
-        // frmShop.redUserInfo.PlainText := True;
-        // end
-        // else
         begin
           frmShop.redUserInfo.Lines.Add(sUser);
           frmShop.redUserInfo.Lines.Add(sPass);
@@ -171,7 +169,10 @@ end;
 
       Until EOF(frmLogIn.tUsin);
 
+      ShowMessage('Closing file...');
+
       CloseFile(frmLogIn.tUsin);
+      ShowMessage('File Closed');
       frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
     end;
   end;
@@ -219,6 +220,8 @@ begin
   ReadLN(frmDash.tLesson, sAnswer);
   lblQues.Caption := sQuestion;
   iNewPoints := 0;
+  lblNewPoints.Caption := '';
+  lblFeedback.Caption := '';
 
   frmLesson.btnCheck.Show; // Shows Needed components
   frmLesson.edtAns.Show;
@@ -241,7 +244,9 @@ begin
   btnCheck.Visible := False;
   btnCheck.Hide;
   edtAns.Hide;
-  edtAns.text := '';
+  edtAns.Text := '';
+  lblNewPoints.Hide;
+  lblFeedback.Hide;
   lblQues.Hide;
   frmLogIn.iPoints := frmLogIn.iPoints + iNewPoints;
   frmDash.lblPoints.Caption := ('Points: ' + IntTOStr(frmLogIn.iPoints));
@@ -285,7 +290,9 @@ begin
 
   btnCheck.Hide;
   edtAns.Hide;
-  edtAns.text := '';
+  edtAns.Text := '';
+  lblNewPoints.Hide;
+  lblFeedback.Hide;
   lblQues.Hide;
   lblInstruction.Hide;
   frmDash.bCustom := False;

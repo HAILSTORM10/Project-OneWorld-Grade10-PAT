@@ -11115,7 +11115,7 @@ object frmHelp: TfrmHelp
     Top = 152
     Width = 761
     Height = 361
-    ActivePage = General
+    ActivePage = TabSheet2
     TabOrder = 1
     object General: TTabSheet
       Caption = 'General'
@@ -11327,9 +11327,11 @@ object frmHelp: TfrmHelp
           
             ' From here you can create new courses with the button on your le' +
             'ft'
+          ' Courses can be deleted using the list on the bottom'
           
             ' You can view the information of users using the tools on your r' +
-            'ight.')
+            'ight.'
+          ' ')
         ParentFont = False
         ReadOnly = True
         TabOrder = 0
