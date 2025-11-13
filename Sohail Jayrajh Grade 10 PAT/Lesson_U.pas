@@ -138,10 +138,8 @@ begin
     if frmLogIn.sUser <> 'Admin' then // If the user is not an Admin
     begin
 
-      ShowMessage('Assigning file...');
       AssignFile(frmLogIn.tUsin, 'Userinfo.txt');
       Reset(frmLogIn.tUsin);
-      ShowMessage('file Assigned!');
       frmShop.redUserInfo.PlainText := True;
 
       frmShop.redUserInfo.Lines.Add(frmLogIn.sUser);
@@ -169,10 +167,8 @@ begin
 
       Until EOF(frmLogIn.tUsin);
 
-      ShowMessage('Closing file...');
 
       CloseFile(frmLogIn.tUsin);
-      ShowMessage('File Closed');
       frmShop.redUserInfo.Lines.SaveToFile('Userinfo.txt'); ;
     end;
   end;
